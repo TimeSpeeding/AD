@@ -26,9 +26,9 @@ namespace Group13SSIS.Models
         public string ContactName { get; set; }
         public string Tel { get; set; }
         public string FaxNo { get; set; }
-        public int HeadId { get; set; }
-        public int RepId { get; set; }
-        public int PointId { get; set; }
+        public Nullable<int> HeadId { get; set; }
+        public Nullable<int> RepId { get; set; }
+        public Nullable<int> PointId { get; set; }
     
         public virtual CollectionPoint CollectionPoint { get; set; }
         public virtual User User { get; set; }

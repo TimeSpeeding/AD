@@ -14,7 +14,12 @@ namespace Group13SSIS.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var depts = db.Depts.ToList();
+                ViewData["depts"] = depts;
+            }
+                return View();
         }
         // POST: for Admin to add new user
         [HttpPost]

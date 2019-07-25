@@ -22,25 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Applies">
-      <EntityTypeMapping TypeName="Group13SSISModel.Apply">
-        <MappingFragment StoreEntitySet="Apply">
-          <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
-          <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ApplyDetails">
-      <EntityTypeMapping TypeName="Group13SSISModel.ApplyDetail">
-        <MappingFragment StoreEntitySet="ApplyDetail">
-          <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
-          <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CollectionPoints">
       <EntityTypeMapping TypeName="Group13SSISModel.CollectionPoint">
         <MappingFragment StoreEntitySet="CollectionPoint">
@@ -83,6 +64,25 @@
           <ScalarProperty Name="ReorderId" ColumnName="ReorderId" />
           <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requisitions">
+      <EntityTypeMapping TypeName="Group13SSISModel.Requisition">
+        <MappingFragment StoreEntitySet="Requisition">
+          <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
+          <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequisitionDetails">
+      <EntityTypeMapping TypeName="Group13SSISModel.RequisitionDetail">
+        <MappingFragment StoreEntitySet="RequisitionDetail">
+          <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
+          <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

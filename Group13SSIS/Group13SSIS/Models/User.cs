@@ -18,10 +18,10 @@ namespace Group13SSIS.Models
         public User()
         {
             this.Adjustments = new HashSet<Adjustment>();
-            this.Applies = new HashSet<Apply>();
             this.Depts = new HashSet<Dept>();
             this.Depts1 = new HashSet<Dept>();
             this.Reorders = new HashSet<Reorder>();
+            this.Requisitions = new HashSet<Requisition>();
         }
     
         public int UserId { get; set; }
@@ -34,13 +34,13 @@ namespace Group13SSIS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Adjustment> Adjustments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Apply> Applies { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dept> Depts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dept> Depts1 { get; set; }
         public virtual Dept Dept { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reorder> Reorders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Requisition> Requisitions { get; set; }
     }
 }

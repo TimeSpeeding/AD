@@ -153,22 +153,23 @@
     <Compile Include="Models\AdjustmentDetail.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Apply.cs">
-      <DependentUpon>ADEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ApplyDetail.cs">
-      <DependentUpon>ADEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\CollectionPoint.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Dept.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\Reorder.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ReorderDetail.cs">
+      <DependentUpon>ADEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Requisition.cs">
+      <DependentUpon>ADEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RequisitionDetail.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stationery.cs">
@@ -198,8 +199,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Models\ADEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ADEntities.Context.cs</LastGenOutput>
       <DependentUpon>ADEntities.edmx</DependentUpon>
+      <LastGenOutput>ADEntities.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\ADEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

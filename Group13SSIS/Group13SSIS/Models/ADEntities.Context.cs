@@ -27,12 +27,12 @@ namespace Group13SSIS.Models
     
         public virtual DbSet<Adjustment> Adjustments { get; set; }
         public virtual DbSet<AdjustmentDetail> AdjustmentDetails { get; set; }
-        public virtual DbSet<Apply> Applies { get; set; }
-        public virtual DbSet<ApplyDetail> ApplyDetails { get; set; }
         public virtual DbSet<CollectionPoint> CollectionPoints { get; set; }
         public virtual DbSet<Dept> Depts { get; set; }
         public virtual DbSet<Reorder> Reorders { get; set; }
         public virtual DbSet<ReorderDetail> ReorderDetails { get; set; }
+        public virtual DbSet<Requisition> Requisitions { get; set; }
+        public virtual DbSet<RequisitionDetail> RequisitionDetails { get; set; }
         public virtual DbSet<Stationery> Stationeries { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Supply> Supplies { get; set; }

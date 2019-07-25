@@ -18,8 +18,8 @@ namespace Group13SSIS.Models
         public Stationery()
         {
             this.AdjustmentDetails = new HashSet<AdjustmentDetail>();
-            this.ApplyDetails = new HashSet<ApplyDetail>();
             this.ReorderDetails = new HashSet<ReorderDetail>();
+            this.RequisitionDetails = new HashSet<RequisitionDetail>();
             this.Supplies = new HashSet<Supply>();
         }
     
@@ -36,9 +36,9 @@ namespace Group13SSIS.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdjustmentDetail> AdjustmentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplyDetail> ApplyDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ReorderDetail> ReorderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RequisitionDetail> RequisitionDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Supply> Supplies { get; set; }
     }

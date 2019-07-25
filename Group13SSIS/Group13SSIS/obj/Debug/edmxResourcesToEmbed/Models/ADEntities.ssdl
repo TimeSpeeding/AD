@@ -20,24 +20,6 @@
     <Property Name="Qty" Type="int" Nullable="false" />
     <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Apply">
-    <Key>
-      <PropertyRef Name="ApplyId" />
-    </Key>
-    <Property Name="ApplyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ApplicantId" Type="int" Nullable="false" />
-    <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ApplyDetail">
-    <Key>
-      <PropertyRef Name="ApplyId" />
-      <PropertyRef Name="StationeryId" />
-    </Key>
-    <Property Name="ApplyId" Type="int" Nullable="false" />
-    <Property Name="StationeryId" Type="int" Nullable="false" />
-    <Property Name="Quantity" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="CollectionPoint">
     <Key>
       <PropertyRef Name="PointId" />
@@ -56,9 +38,9 @@
     <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Tel" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FaxNo" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="HeadId" Type="int" Nullable="false" />
-    <Property Name="RepId" Type="int" Nullable="false" />
-    <Property Name="PointId" Type="int" Nullable="false" />
+    <Property Name="HeadId" Type="int" />
+    <Property Name="RepId" Type="int" />
+    <Property Name="PointId" Type="int" />
   </EntityType>
   <EntityType Name="Reorder">
     <Key>
@@ -79,6 +61,24 @@
     <Property Name="ReorderId" Type="int" Nullable="false" />
     <Property Name="StationeryId" Type="int" Nullable="false" />
     <Property Name="Qty" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Requisition">
+    <Key>
+      <PropertyRef Name="ApplyId" />
+    </Key>
+    <Property Name="ApplyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequisitionDetail">
+    <Key>
+      <PropertyRef Name="ApplyId" />
+      <PropertyRef Name="StationeryId" />
+    </Key>
+    <Property Name="ApplyId" Type="int" Nullable="false" />
+    <Property Name="StationeryId" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Stationery">
     <Key>
@@ -165,42 +165,42 @@
   </Association>
   <Association Name="FK_Apply_User">
     <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Apply" Type="Self.Apply" Multiplicity="*" />
+    <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
         <PropertyRef Name="UserId" />
       </Principal>
-      <Dependent Role="Apply">
+      <Dependent Role="Requisition">
         <PropertyRef Name="ApplicantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ApplyDetail_Apply">
-    <End Role="Apply" Type="Self.Apply" Multiplicity="1" />
-    <End Role="ApplyDetail" Type="Self.ApplyDetail" Multiplicity="*" />
+    <End Role="Requisition" Type="Self.Requisition" Multiplicity="1" />
+    <End Role="RequisitionDetail" Type="Self.RequisitionDetail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Apply">
+      <Principal Role="Requisition">
         <PropertyRef Name="ApplyId" />
       </Principal>
-      <Dependent Role="ApplyDetail">
+      <Dependent Role="RequisitionDetail">
         <PropertyRef Name="ApplyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ApplyDetail_Stationery">
     <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
-    <End Role="ApplyDetail" Type="Self.ApplyDetail" Multiplicity="*" />
+    <End Role="RequisitionDetail" Type="Self.RequisitionDetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Stationery">
         <PropertyRef Name="StationeryId" />
       </Principal>
-      <Dependent Role="ApplyDetail">
+      <Dependent Role="RequisitionDetail">
         <PropertyRef Name="StationeryId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Dept_CollectionPoint">
-    <End Role="CollectionPoint" Type="Self.CollectionPoint" Multiplicity="1" />
+    <End Role="CollectionPoint" Type="Self.CollectionPoint" Multiplicity="0..1" />
     <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CollectionPoint">
@@ -212,7 +212,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Dept_User1">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
@@ -224,7 +224,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Dept_User2">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
     <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
@@ -322,12 +322,12 @@
   <EntityContainer Name="Group13SSISModelStoreContainer">
     <EntitySet Name="Adjustment" EntityType="Self.Adjustment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AdjustmentDetail" EntityType="Self.AdjustmentDetail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Apply" EntityType="Self.Apply" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ApplyDetail" EntityType="Self.ApplyDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CollectionPoint" EntityType="Self.CollectionPoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Reorder" EntityType="Self.Reorder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReorderDetail" EntityType="Self.ReorderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Requisition" EntityType="Self.Requisition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequisitionDetail" EntityType="Self.RequisitionDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stationery" EntityType="Self.Stationery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
@@ -346,15 +346,15 @@
     </AssociationSet>
     <AssociationSet Name="FK_Apply_User" Association="Self.FK_Apply_User">
       <End Role="User" EntitySet="User" />
-      <End Role="Apply" EntitySet="Apply" />
+      <End Role="Requisition" EntitySet="Requisition" />
     </AssociationSet>
     <AssociationSet Name="FK_ApplyDetail_Apply" Association="Self.FK_ApplyDetail_Apply">
-      <End Role="Apply" EntitySet="Apply" />
-      <End Role="ApplyDetail" EntitySet="ApplyDetail" />
+      <End Role="Requisition" EntitySet="Requisition" />
+      <End Role="RequisitionDetail" EntitySet="RequisitionDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_ApplyDetail_Stationery" Association="Self.FK_ApplyDetail_Stationery">
       <End Role="Stationery" EntitySet="Stationery" />
-      <End Role="ApplyDetail" EntitySet="ApplyDetail" />
+      <End Role="RequisitionDetail" EntitySet="RequisitionDetail" />
     </AssociationSet>
     <AssociationSet Name="FK_Dept_CollectionPoint" Association="Self.FK_Dept_CollectionPoint">
       <End Role="CollectionPoint" EntitySet="CollectionPoint" />
