@@ -9,8 +9,6 @@
     <Property Name="Amount" Type="Double" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Adjustment_User" FromRole="Adjustment" ToRole="User" />
-    <NavigationProperty Name="AdjustmentDetails" Relationship="Self.FK_AdjustmentDetail_Adjustment" FromRole="Adjustment" ToRole="AdjustmentDetail" />
   </EntityType>
   <EntityType Name="AdjustmentDetail">
     <Key>
@@ -21,8 +19,6 @@
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
     <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Adjustment" Relationship="Self.FK_AdjustmentDetail_Adjustment" FromRole="AdjustmentDetail" ToRole="Adjustment" />
-    <NavigationProperty Name="Stationery" Relationship="Self.FK_AdjustmentDetail_Stationery" FromRole="AdjustmentDetail" ToRole="Stationery" />
   </EntityType>
   <EntityType Name="CollectionPoint">
     <Key>
@@ -31,7 +27,6 @@
     <Property Name="PointId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Depts" Relationship="Self.FK_Dept_CollectionPoint" FromRole="CollectionPoint" ToRole="Dept" />
   </EntityType>
   <EntityType Name="Dept">
     <Key>
@@ -46,10 +41,6 @@
     <Property Name="HeadId" Type="Int32" />
     <Property Name="RepId" Type="Int32" />
     <Property Name="PointId" Type="Int32" />
-    <NavigationProperty Name="CollectionPoint" Relationship="Self.FK_Dept_CollectionPoint" FromRole="Dept" ToRole="CollectionPoint" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Dept_User1" FromRole="Dept" ToRole="User" />
-    <NavigationProperty Name="User1" Relationship="Self.FK_Dept_User2" FromRole="Dept" ToRole="User" />
-    <NavigationProperty Name="Users" Relationship="Self.FK_User_Dept" FromRole="Dept" ToRole="User" />
   </EntityType>
   <EntityType Name="Reorder">
     <Key>
@@ -61,9 +52,6 @@
     <Property Name="Amount" Type="Double" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Supplier" Relationship="Self.FK_Reorder_Supplier" FromRole="Reorder" ToRole="Supplier" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Reorder_User" FromRole="Reorder" ToRole="User" />
-    <NavigationProperty Name="ReorderDetails" Relationship="Self.FK_ReorderDetail_Reorder" FromRole="Reorder" ToRole="ReorderDetail" />
   </EntityType>
   <EntityType Name="ReorderDetail">
     <Key>
@@ -73,8 +61,6 @@
     <Property Name="ReorderId" Type="Int32" Nullable="false" />
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Reorder" Relationship="Self.FK_ReorderDetail_Reorder" FromRole="ReorderDetail" ToRole="Reorder" />
-    <NavigationProperty Name="Stationery" Relationship="Self.FK_ReorderDetail_Stationery" FromRole="ReorderDetail" ToRole="Stationery" />
   </EntityType>
   <EntityType Name="Requisition">
     <Key>
@@ -84,8 +70,6 @@
     <Property Name="ApplicantId" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="User" Relationship="Self.FK_Apply_User" FromRole="Requisition" ToRole="User" />
-    <NavigationProperty Name="RequisitionDetails" Relationship="Self.FK_ApplyDetail_Apply" FromRole="Requisition" ToRole="RequisitionDetail" />
   </EntityType>
   <EntityType Name="RequisitionDetail">
     <Key>
@@ -95,8 +79,6 @@
     <Property Name="ApplyId" Type="Int32" Nullable="false" />
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Requisition" Relationship="Self.FK_ApplyDetail_Apply" FromRole="RequisitionDetail" ToRole="Requisition" />
-    <NavigationProperty Name="Stationery" Relationship="Self.FK_ApplyDetail_Stationery" FromRole="RequisitionDetail" ToRole="Stationery" />
   </EntityType>
   <EntityType Name="Stationery">
     <Key>
@@ -111,10 +93,6 @@
     <Property Name="ReorderLevel" Type="Int32" Nullable="false" />
     <Property Name="ReorderQty" Type="Int32" Nullable="false" />
     <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="AdjustmentDetails" Relationship="Self.FK_AdjustmentDetail_Stationery" FromRole="Stationery" ToRole="AdjustmentDetail" />
-    <NavigationProperty Name="ReorderDetails" Relationship="Self.FK_ReorderDetail_Stationery" FromRole="Stationery" ToRole="ReorderDetail" />
-    <NavigationProperty Name="RequisitionDetails" Relationship="Self.FK_ApplyDetail_Stationery" FromRole="Stationery" ToRole="RequisitionDetail" />
-    <NavigationProperty Name="Supplies" Relationship="Self.FK_Supply_Stationery" FromRole="Stationery" ToRole="Supply" />
   </EntityType>
   <EntityType Name="Supplier">
     <Key>
@@ -128,8 +106,6 @@
     <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Reorders" Relationship="Self.FK_Reorder_Supplier" FromRole="Supplier" ToRole="Reorder" />
-    <NavigationProperty Name="Supplies" Relationship="Self.FK_Supply_Supplier" FromRole="Supplier" ToRole="Supply" />
   </EntityType>
   <EntityType Name="Supply">
     <Key>
@@ -139,8 +115,6 @@
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="SupplierId" Type="Int32" Nullable="false" />
     <Property Name="Sort" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Stationery" Relationship="Self.FK_Supply_Stationery" FromRole="Supply" ToRole="Stationery" />
-    <NavigationProperty Name="Supplier" Relationship="Self.FK_Supply_Supplier" FromRole="Supply" ToRole="Supplier" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -152,205 +126,7 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="DeptId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Adjustments" Relationship="Self.FK_Adjustment_User" FromRole="User" ToRole="Adjustment" />
-    <NavigationProperty Name="Depts" Relationship="Self.FK_Dept_User1" FromRole="User" ToRole="Dept" />
-    <NavigationProperty Name="Depts1" Relationship="Self.FK_Dept_User2" FromRole="User" ToRole="Dept" />
-    <NavigationProperty Name="Dept" Relationship="Self.FK_User_Dept" FromRole="User" ToRole="Dept" />
-    <NavigationProperty Name="Reorders" Relationship="Self.FK_Reorder_User" FromRole="User" ToRole="Reorder" />
-    <NavigationProperty Name="Requisitions" Relationship="Self.FK_Apply_User" FromRole="User" ToRole="Requisition" />
   </EntityType>
-  <Association Name="FK_Adjustment_User">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Adjustment" Type="Self.Adjustment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Adjustment">
-        <PropertyRef Name="ClerkId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AdjustmentDetail_Adjustment">
-    <End Role="Adjustment" Type="Self.Adjustment" Multiplicity="1" />
-    <End Role="AdjustmentDetail" Type="Self.AdjustmentDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Adjustment">
-        <PropertyRef Name="AdjustmentId" />
-      </Principal>
-      <Dependent Role="AdjustmentDetail">
-        <PropertyRef Name="AdjustmentId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AdjustmentDetail_Stationery">
-    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
-    <End Role="AdjustmentDetail" Type="Self.AdjustmentDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Stationery">
-        <PropertyRef Name="StationeryId" />
-      </Principal>
-      <Dependent Role="AdjustmentDetail">
-        <PropertyRef Name="StationeryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Dept_CollectionPoint">
-    <End Role="CollectionPoint" Type="Self.CollectionPoint" Multiplicity="0..1" />
-    <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CollectionPoint">
-        <PropertyRef Name="PointId" />
-      </Principal>
-      <Dependent Role="Dept">
-        <PropertyRef Name="PointId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Dept_User1">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Dept">
-        <PropertyRef Name="HeadId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Dept_User2">
-    <End Role="User" Type="Self.User" Multiplicity="0..1" />
-    <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Dept">
-        <PropertyRef Name="RepId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_User_Dept">
-    <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
-    <End Role="User" Type="Self.User" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dept">
-        <PropertyRef Name="DeptId" />
-      </Principal>
-      <Dependent Role="User">
-        <PropertyRef Name="DeptId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reorder_Supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-    <End Role="Reorder" Type="Self.Reorder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="SupplierId" />
-      </Principal>
-      <Dependent Role="Reorder">
-        <PropertyRef Name="SupplierId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Reorder_User">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Reorder" Type="Self.Reorder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Reorder">
-        <PropertyRef Name="ClerkId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReorderDetail_Reorder">
-    <End Role="Reorder" Type="Self.Reorder" Multiplicity="1" />
-    <End Role="ReorderDetail" Type="Self.ReorderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Reorder">
-        <PropertyRef Name="ReorderId" />
-      </Principal>
-      <Dependent Role="ReorderDetail">
-        <PropertyRef Name="ReorderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ReorderDetail_Stationery">
-    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
-    <End Role="ReorderDetail" Type="Self.ReorderDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Stationery">
-        <PropertyRef Name="StationeryId" />
-      </Principal>
-      <Dependent Role="ReorderDetail">
-        <PropertyRef Name="StationeryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Apply_User">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
-    <End Role="Requisition" Type="Self.Requisition" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="User">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Requisition">
-        <PropertyRef Name="ApplicantId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ApplyDetail_Apply">
-    <End Role="Requisition" Type="Self.Requisition" Multiplicity="1" />
-    <End Role="RequisitionDetail" Type="Self.RequisitionDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Requisition">
-        <PropertyRef Name="ApplyId" />
-      </Principal>
-      <Dependent Role="RequisitionDetail">
-        <PropertyRef Name="ApplyId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ApplyDetail_Stationery">
-    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
-    <End Role="RequisitionDetail" Type="Self.RequisitionDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Stationery">
-        <PropertyRef Name="StationeryId" />
-      </Principal>
-      <Dependent Role="RequisitionDetail">
-        <PropertyRef Name="StationeryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Supply_Stationery">
-    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
-    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Stationery">
-        <PropertyRef Name="StationeryId" />
-      </Principal>
-      <Dependent Role="Supply">
-        <PropertyRef Name="StationeryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Supply_Supplier">
-    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
-    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="SupplierId" />
-      </Principal>
-      <Dependent Role="Supply">
-        <PropertyRef Name="SupplierId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="Group13SSISEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Adjustments" EntityType="Self.Adjustment" />
     <EntitySet Name="AdjustmentDetails" EntityType="Self.AdjustmentDetail" />
@@ -364,69 +140,5 @@
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
     <EntitySet Name="Supplies" EntityType="Self.Supply" />
     <EntitySet Name="Users" EntityType="Self.User" />
-    <AssociationSet Name="FK_Adjustment_User" Association="Self.FK_Adjustment_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Adjustment" EntitySet="Adjustments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AdjustmentDetail_Adjustment" Association="Self.FK_AdjustmentDetail_Adjustment">
-      <End Role="Adjustment" EntitySet="Adjustments" />
-      <End Role="AdjustmentDetail" EntitySet="AdjustmentDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AdjustmentDetail_Stationery" Association="Self.FK_AdjustmentDetail_Stationery">
-      <End Role="Stationery" EntitySet="Stationeries" />
-      <End Role="AdjustmentDetail" EntitySet="AdjustmentDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Dept_CollectionPoint" Association="Self.FK_Dept_CollectionPoint">
-      <End Role="CollectionPoint" EntitySet="CollectionPoints" />
-      <End Role="Dept" EntitySet="Depts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Dept_User1" Association="Self.FK_Dept_User1">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Dept" EntitySet="Depts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Dept_User2" Association="Self.FK_Dept_User2">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Dept" EntitySet="Depts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_User_Dept" Association="Self.FK_User_Dept">
-      <End Role="Dept" EntitySet="Depts" />
-      <End Role="User" EntitySet="Users" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Reorder_Supplier" Association="Self.FK_Reorder_Supplier">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="Reorder" EntitySet="Reorders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Reorder_User" Association="Self.FK_Reorder_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Reorder" EntitySet="Reorders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReorderDetail_Reorder" Association="Self.FK_ReorderDetail_Reorder">
-      <End Role="Reorder" EntitySet="Reorders" />
-      <End Role="ReorderDetail" EntitySet="ReorderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ReorderDetail_Stationery" Association="Self.FK_ReorderDetail_Stationery">
-      <End Role="Stationery" EntitySet="Stationeries" />
-      <End Role="ReorderDetail" EntitySet="ReorderDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Apply_User" Association="Self.FK_Apply_User">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Requisition" EntitySet="Requisitions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ApplyDetail_Apply" Association="Self.FK_ApplyDetail_Apply">
-      <End Role="Requisition" EntitySet="Requisitions" />
-      <End Role="RequisitionDetail" EntitySet="RequisitionDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ApplyDetail_Stationery" Association="Self.FK_ApplyDetail_Stationery">
-      <End Role="Stationery" EntitySet="Stationeries" />
-      <End Role="RequisitionDetail" EntitySet="RequisitionDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Supply_Stationery" Association="Self.FK_Supply_Stationery">
-      <End Role="Stationery" EntitySet="Stationeries" />
-      <End Role="Supply" EntitySet="Supplies" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Supply_Supplier" Association="Self.FK_Supply_Supplier">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="Supply" EntitySet="Supplies" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

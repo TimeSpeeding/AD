@@ -17,8 +17,5 @@ namespace Group13SSIS.Models
         public int StationeryId { get; set; }
         public int SupplierId { get; set; }
         public int Sort { get; set; }
-    
-        public virtual Stationery Stationery { get; set; }
-        public virtual Supplier Supplier { get; set; }
     }
 }

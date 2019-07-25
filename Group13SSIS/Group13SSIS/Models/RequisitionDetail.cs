@@ -17,8 +17,5 @@ namespace Group13SSIS.Models
         public int ApplyId { get; set; }
         public int StationeryId { get; set; }
         public int Quantity { get; set; }
-    
-        public virtual Requisition Requisition { get; set; }
-        public virtual Stationery Stationery { get; set; }
     }
 }

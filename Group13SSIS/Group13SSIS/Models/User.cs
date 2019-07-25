@@ -14,33 +14,11 @@ namespace Group13SSIS.Models
     
     public partial class User
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
-        {
-            this.Adjustments = new HashSet<Adjustment>();
-            this.Depts = new HashSet<Dept>();
-            this.Depts1 = new HashSet<Dept>();
-            this.Reorders = new HashSet<Reorder>();
-            this.Requisitions = new HashSet<Requisition>();
-        }
-    
         public int UserId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public int DeptId { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Adjustment> Adjustments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dept> Depts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dept> Depts1 { get; set; }
-        public virtual Dept Dept { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reorder> Reorders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Requisition> Requisitions { get; set; }
     }
 }

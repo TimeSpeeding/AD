@@ -14,12 +14,6 @@ namespace Group13SSIS.Models
     
     public partial class Dept
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Dept()
-        {
-            this.Users = new HashSet<User>();
-        }
-    
         public int DeptId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -29,11 +23,5 @@ namespace Group13SSIS.Models
         public Nullable<int> HeadId { get; set; }
         public Nullable<int> RepId { get; set; }
         public Nullable<int> PointId { get; set; }
-    
-        public virtual CollectionPoint CollectionPoint { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
     }
 }

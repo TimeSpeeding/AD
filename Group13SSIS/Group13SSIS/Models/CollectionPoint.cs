@@ -14,17 +14,8 @@ namespace Group13SSIS.Models
     
     public partial class CollectionPoint
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CollectionPoint()
-        {
-            this.Depts = new HashSet<Dept>();
-        }
-    
         public int PointId { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Dept> Depts { get; set; }
     }
 }

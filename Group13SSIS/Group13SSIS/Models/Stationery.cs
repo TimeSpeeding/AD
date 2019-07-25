@@ -14,15 +14,6 @@ namespace Group13SSIS.Models
     
     public partial class Stationery
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Stationery()
-        {
-            this.AdjustmentDetails = new HashSet<AdjustmentDetail>();
-            this.ReorderDetails = new HashSet<ReorderDetail>();
-            this.RequisitionDetails = new HashSet<RequisitionDetail>();
-            this.Supplies = new HashSet<Supply>();
-        }
-    
         public int StationeryId { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
@@ -32,14 +23,5 @@ namespace Group13SSIS.Models
         public int ReorderLevel { get; set; }
         public int ReorderQty { get; set; }
         public string UOM { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdjustmentDetail> AdjustmentDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ReorderDetail> ReorderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RequisitionDetail> RequisitionDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supply> Supplies { get; set; }
     }
 }

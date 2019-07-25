@@ -17,8 +17,5 @@ namespace Group13SSIS.Models
         public int ReorderId { get; set; }
         public int StationeryId { get; set; }
         public int Qty { get; set; }
-    
-        public virtual Reorder Reorder { get; set; }
-        public virtual Stationery Stationery { get; set; }
     }
 }

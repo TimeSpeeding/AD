@@ -18,8 +18,5 @@ namespace Group13SSIS.Models
         public int StationeryId { get; set; }
         public int Qty { get; set; }
         public string Reason { get; set; }
-    
-        public virtual Adjustment Adjustment { get; set; }
-        public virtual Stationery Stationery { get; set; }
     }
 }

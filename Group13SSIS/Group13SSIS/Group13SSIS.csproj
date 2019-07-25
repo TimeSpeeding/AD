@@ -159,7 +159,7 @@
     <Compile Include="Models\Dept.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Extended\User.cs" />
+    <Compile Include="Models\Extended\UserVM.cs" />
     <Compile Include="Models\Reorder.cs">
       <DependentUpon>ADEntities.tt</DependentUpon>
     </Compile>

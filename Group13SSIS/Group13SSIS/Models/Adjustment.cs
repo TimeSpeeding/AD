@@ -14,20 +14,10 @@ namespace Group13SSIS.Models
     
     public partial class Adjustment
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Adjustment()
-        {
-            this.AdjustmentDetails = new HashSet<AdjustmentDetail>();
-        }
-    
         public int AdjustmentId { get; set; }
         public int ClerkId { get; set; }
         public double Amount { get; set; }
         public System.DateTime Date { get; set; }
         public string Status { get; set; }
-    
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdjustmentDetail> AdjustmentDetails { get; set; }
     }
 }

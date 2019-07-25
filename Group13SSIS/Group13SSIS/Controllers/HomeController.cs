@@ -10,35 +10,47 @@ namespace Group13SSIS.Controllers
 {
     public class HomeController : Controller
     {
+
         // GET: Register Page
         [HttpGet]
         public ActionResult Register()
         {
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
-                var depts = db.Depts.ToList();
+                List<Dept> depts = db.Depts.ToList();
                 ViewData["depts"] = depts;
             }
-                return View();
+            return View();
         }
         // POST: for Admin to add new user
         [HttpPost]
-        public ActionResult Register(User user)
+        public ActionResult Register(UserVM userVM)
         {
+            using (Group13SSISEntities dc = new Group13SSISEntities())
+            {
+                List<Dept> depts = dc.Depts.ToList();
+                ViewData["depts"] = depts;
+            }
             if (ModelState.IsValid)
             {
-                if (UsernameVerification.IsUsernameExist(user.Username))
+                if (UsernameVerification.IsUsernameExist(userVM.Username))
                 {
                     ModelState.AddModelError("Username", "Username already exist");
-                    return View(user);
+                    return View(userVM);
                 }
-
-                user.Password = Crypto.Hash(user.Password);
+                User user = new User()
+                {
+                    Username = userVM.Username,
+                    Password = Crypto.Hash(userVM.Password),
+                    Name = userVM.Name,
+                    Email = userVM.Email,
+                    DeptId = Int32.Parse(userVM.DeptId)
+                };
                 using (Group13SSISEntities db = new Group13SSISEntities())
                 {
                     db.Users.Add(user);
                     db.SaveChanges();
-                    RedirectToAction("Register");
+                    return View(new UserVM());
                 }
             }
             return View();

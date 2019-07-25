@@ -14,13 +14,6 @@ namespace Group13SSIS.Models
     
     public partial class Supplier
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Supplier()
-        {
-            this.Reorders = new HashSet<Reorder>();
-            this.Supplies = new HashSet<Supply>();
-        }
-    
         public int SupplierId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -29,10 +22,5 @@ namespace Group13SSIS.Models
         public string PhoneNo { get; set; }
         public string FaxNo { get; set; }
         public string Address { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reorder> Reorders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Supply> Supplies { get; set; }
     }
 }
