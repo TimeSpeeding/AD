@@ -20,8 +20,25 @@ namespace Group13SSIS.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
+            if (ModelState.IsValid)
+            {
+                if (UsernameVerification.IsUsernameExist(user.Username))
+                {
+                    ModelState.AddModelError("Username", "Username already exist");
+                    return View(user);
+                }
 
+                user.Password = Crypto.Hash(user.Password);
+                using (Group13SSISEntities db = new Group13SSISEntities())
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    RedirectToAction("Register");
+                }
+            }
             return View();
         }
+
+
     }
 }

@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Group13SSISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Adjustment">
+    <Key>
+      <PropertyRef Name="AdjustmentId" />
+    </Key>
+    <Property Name="AdjustmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClerkId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AdjustmentDetail">
+    <Key>
+      <PropertyRef Name="AdjustmentId" />
+      <PropertyRef Name="StationeryId" />
+    </Key>
+    <Property Name="AdjustmentId" Type="int" Nullable="false" />
+    <Property Name="StationeryId" Type="int" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="Reason" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Apply">
+    <Key>
+      <PropertyRef Name="ApplyId" />
+    </Key>
+    <Property Name="ApplyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ApplicantId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplyDetail">
+    <Key>
+      <PropertyRef Name="ApplyId" />
+      <PropertyRef Name="StationeryId" />
+    </Key>
+    <Property Name="ApplyId" Type="int" Nullable="false" />
+    <Property Name="StationeryId" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CollectionPoint">
+    <Key>
+      <PropertyRef Name="PointId" />
+    </Key>
+    <Property Name="PointId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Dept">
+    <Key>
+      <PropertyRef Name="DeptId" />
+    </Key>
+    <Property Name="DeptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tel" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FaxNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HeadId" Type="int" Nullable="false" />
+    <Property Name="RepId" Type="int" Nullable="false" />
+    <Property Name="PointId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reorder">
+    <Key>
+      <PropertyRef Name="ReorderId" />
+    </Key>
+    <Property Name="ReorderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplierId" Type="int" Nullable="false" />
+    <Property Name="ClerkId" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="float" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReorderDetail">
+    <Key>
+      <PropertyRef Name="ReorderId" />
+      <PropertyRef Name="StationeryId" />
+    </Key>
+    <Property Name="ReorderId" Type="int" Nullable="false" />
+    <Property Name="StationeryId" Type="int" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stationery">
+    <Key>
+      <PropertyRef Name="StationeryId" />
+    </Key>
+    <Property Name="StationeryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="ReorderLevel" Type="int" Nullable="false" />
+    <Property Name="ReorderQty" Type="int" Nullable="false" />
+    <Property Name="UOM" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierId" />
+    </Key>
+    <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GSTNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FaxNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Supply">
+    <Key>
+      <PropertyRef Name="StationeryId" />
+      <PropertyRef Name="SupplierId" />
+    </Key>
+    <Property Name="StationeryId" Type="int" Nullable="false" />
+    <Property Name="SupplierId" Type="int" Nullable="false" />
+    <Property Name="Sort" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DeptId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Adjustment_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Adjustment" Type="Self.Adjustment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Adjustment">
+        <PropertyRef Name="ClerkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdjustmentDetail_Adjustment">
+    <End Role="Adjustment" Type="Self.Adjustment" Multiplicity="1" />
+    <End Role="AdjustmentDetail" Type="Self.AdjustmentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Adjustment">
+        <PropertyRef Name="AdjustmentId" />
+      </Principal>
+      <Dependent Role="AdjustmentDetail">
+        <PropertyRef Name="AdjustmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdjustmentDetail_Stationery">
+    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
+    <End Role="AdjustmentDetail" Type="Self.AdjustmentDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stationery">
+        <PropertyRef Name="StationeryId" />
+      </Principal>
+      <Dependent Role="AdjustmentDetail">
+        <PropertyRef Name="StationeryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Apply_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Apply" Type="Self.Apply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Apply">
+        <PropertyRef Name="ApplicantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplyDetail_Apply">
+    <End Role="Apply" Type="Self.Apply" Multiplicity="1" />
+    <End Role="ApplyDetail" Type="Self.ApplyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Apply">
+        <PropertyRef Name="ApplyId" />
+      </Principal>
+      <Dependent Role="ApplyDetail">
+        <PropertyRef Name="ApplyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplyDetail_Stationery">
+    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
+    <End Role="ApplyDetail" Type="Self.ApplyDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stationery">
+        <PropertyRef Name="StationeryId" />
+      </Principal>
+      <Dependent Role="ApplyDetail">
+        <PropertyRef Name="StationeryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dept_CollectionPoint">
+    <End Role="CollectionPoint" Type="Self.CollectionPoint" Multiplicity="1" />
+    <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CollectionPoint">
+        <PropertyRef Name="PointId" />
+      </Principal>
+      <Dependent Role="Dept">
+        <PropertyRef Name="PointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dept_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Dept">
+        <PropertyRef Name="HeadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dept_User2">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Dept" Type="Self.Dept" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Dept">
+        <PropertyRef Name="RepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reorder_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Reorder" Type="Self.Reorder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierId" />
+      </Principal>
+      <Dependent Role="Reorder">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Reorder_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Reorder" Type="Self.Reorder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Reorder">
+        <PropertyRef Name="ClerkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReorderDetail_Reorder">
+    <End Role="Reorder" Type="Self.Reorder" Multiplicity="1" />
+    <End Role="ReorderDetail" Type="Self.ReorderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reorder">
+        <PropertyRef Name="ReorderId" />
+      </Principal>
+      <Dependent Role="ReorderDetail">
+        <PropertyRef Name="ReorderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReorderDetail_Stationery">
+    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
+    <End Role="ReorderDetail" Type="Self.ReorderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stationery">
+        <PropertyRef Name="StationeryId" />
+      </Principal>
+      <Dependent Role="ReorderDetail">
+        <PropertyRef Name="StationeryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supply_Stationery">
+    <End Role="Stationery" Type="Self.Stationery" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stationery">
+        <PropertyRef Name="StationeryId" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="StationeryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Supply_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierId" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Dept">
+    <End Role="Dept" Type="Self.Dept" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dept">
+        <PropertyRef Name="DeptId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="DeptId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Group13SSISModelStoreContainer">
+    <EntitySet Name="Adjustment" EntityType="Self.Adjustment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AdjustmentDetail" EntityType="Self.AdjustmentDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Apply" EntityType="Self.Apply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ApplyDetail" EntityType="Self.ApplyDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CollectionPoint" EntityType="Self.CollectionPoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Reorder" EntityType="Self.Reorder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReorderDetail" EntityType="Self.ReorderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Stationery" EntityType="Self.Stationery" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Adjustment_User" Association="Self.FK_Adjustment_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Adjustment" EntitySet="Adjustment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdjustmentDetail_Adjustment" Association="Self.FK_AdjustmentDetail_Adjustment">
+      <End Role="Adjustment" EntitySet="Adjustment" />
+      <End Role="AdjustmentDetail" EntitySet="AdjustmentDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdjustmentDetail_Stationery" Association="Self.FK_AdjustmentDetail_Stationery">
+      <End Role="Stationery" EntitySet="Stationery" />
+      <End Role="AdjustmentDetail" EntitySet="AdjustmentDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Apply_User" Association="Self.FK_Apply_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Apply" EntitySet="Apply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplyDetail_Apply" Association="Self.FK_ApplyDetail_Apply">
+      <End Role="Apply" EntitySet="Apply" />
+      <End Role="ApplyDetail" EntitySet="ApplyDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplyDetail_Stationery" Association="Self.FK_ApplyDetail_Stationery">
+      <End Role="Stationery" EntitySet="Stationery" />
+      <End Role="ApplyDetail" EntitySet="ApplyDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dept_CollectionPoint" Association="Self.FK_Dept_CollectionPoint">
+      <End Role="CollectionPoint" EntitySet="CollectionPoint" />
+      <End Role="Dept" EntitySet="Dept" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dept_User1" Association="Self.FK_Dept_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="Dept" EntitySet="Dept" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dept_User2" Association="Self.FK_Dept_User2">
+      <End Role="User" EntitySet="User" />
+      <End Role="Dept" EntitySet="Dept" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reorder_Supplier" Association="Self.FK_Reorder_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Reorder" EntitySet="Reorder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Reorder_User" Association="Self.FK_Reorder_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Reorder" EntitySet="Reorder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReorderDetail_Reorder" Association="Self.FK_ReorderDetail_Reorder">
+      <End Role="Reorder" EntitySet="Reorder" />
+      <End Role="ReorderDetail" EntitySet="ReorderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReorderDetail_Stationery" Association="Self.FK_ReorderDetail_Stationery">
+      <End Role="Stationery" EntitySet="Stationery" />
+      <End Role="ReorderDetail" EntitySet="ReorderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supply_Stationery" Association="Self.FK_Supply_Stationery">
+      <End Role="Stationery" EntitySet="Stationery" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Supply_Supplier" Association="Self.FK_Supply_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Supply" EntitySet="Supply" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Dept" Association="Self.FK_User_Dept">
+      <End Role="Dept" EntitySet="Dept" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
