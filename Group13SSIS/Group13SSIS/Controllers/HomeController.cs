@@ -15,10 +15,10 @@ namespace Group13SSIS.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            using (Group13SSISEntities db = new Group13SSISEntities())
+            using (Group13SSISEntities dc = new Group13SSISEntities())
             {
-                List<Dept> depts = db.Depts.ToList();
-                ViewData["depts"] = depts;
+                ViewData["depts"] = dc.Depts.ToList();
+                ViewData["roles"] = dc.Roles.ToList();
             }
             return View();
         }
@@ -28,8 +28,8 @@ namespace Group13SSIS.Controllers
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
-                List<Dept> depts = dc.Depts.ToList();
-                ViewData["depts"] = depts;
+                ViewData["depts"] = dc.Depts.ToList();
+                ViewData["roles"] = dc.Roles.ToList();
             }
             if (ModelState.IsValid)
             {
@@ -44,7 +44,8 @@ namespace Group13SSIS.Controllers
                     Password = Crypto.Hash(userVM.Password),
                     Name = userVM.Name,
                     Email = userVM.Email,
-                    DeptId = Int32.Parse(userVM.DeptId)
+                    DeptId = Int32.Parse(userVM.DeptId),
+                    RoleId = Int32.Parse(userVM.RoleId)
                 };
                 using (Group13SSISEntities db = new Group13SSISEntities())
                 {
@@ -56,6 +57,50 @@ namespace Group13SSIS.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(UserVM userVM)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+
+                userVM.Password = Crypto.Hash(userVM.Password);
+                var user = db.Users.Where(x => x.Username == userVM.Username && x.Password == userVM.Password).FirstOrDefault();
+                if (user == null)
+                {
+                    ModelState.AddModelError("Password", "Username or password is incorrect");
+                    userVM.Password = null;
+                    return View(userVM);
+                }
+                else
+                {
+                    Session["user"] = user;
+                    return RedirectToAction("index", "Home");
+                }
+            }
+
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            var user = (User)Session["user"];
+            Session.Abandon();
+            return RedirectToAction("Login", "Home");
+        }
+
+        public ActionResult Sorry()
+        {
+            return View();
+        }
 
     }
 }

@@ -2,15 +2,23 @@
 
 @{
     ViewBag.Title = "Register";
-    var list = ViewData["depts"] as List<Group13SSIS.Models.Dept>;
+    var deptlist = ViewData["depts"] as List<Group13SSIS.Models.Dept>;
+    var rolelist = ViewData["roles"] as List<Group13SSIS.Models.Role>;
+    var user = (Group13SSIS.Models.User)Session["user"];
+    if (user == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+    else if (user.RoleId != 1)
+    {
+        Response.Redirect("~/home/sorry");
+    }
 }
 
 <h2>Register</h2>
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-
 <div class="form-horizontal">
     <h4>User</h4>
     <hr />
@@ -51,13 +59,27 @@
         @Html.LabelFor(model => model.DeptId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <select id="DeptId" name="DeptId">
-                <option value="0">-- Please select a department --</option>
-                @foreach (var dept in list)
+                <option>-- Please select a department --</option>
+                @foreach (var dept in deptlist)
                 {
                     @:<option value="@dept.DeptId">@dept.Name</option>
                 }
             </select>
             @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="RoleId" name="RoleId">
+                <option>-- Please select a role --</option>
+                @foreach (var role in rolelist)
+                {
+                    @:<option value="@role.RoleId">@role.Name</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
         </div>
     </div>
 

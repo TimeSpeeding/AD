@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    if (Session["user"] == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+    var user = (Group13SSIS.Models.User)Session["user"];
+}
+
+<h2>Index</h2>
+
+@if (user != null)
+{
+    <h1>Hello, @user.Name</h1>
+}
+

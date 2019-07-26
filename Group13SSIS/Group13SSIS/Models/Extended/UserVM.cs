@@ -26,5 +26,8 @@ namespace Group13SSIS.Models
         [Display(Name = "Department:")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please select a department!")]
         public string DeptId { get; set; }
+        [Display(Name = "Role:")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please select a role!")]
+        public string RoleId { get; set; }
     }
 }
