@@ -10,52 +10,8 @@ namespace Group13SSIS.Controllers
 {
     public class HomeController : Controller
     {
-
-        // GET: Register Page
-        [HttpGet]
-        public ActionResult Register()
-        {
-            using (Group13SSISEntities dc = new Group13SSISEntities())
-            {
-                ViewData["depts"] = dc.Depts.ToList();
-                ViewData["roles"] = dc.Roles.ToList();
-            }
-            return View();
-        }
-        // POST: for Admin to add new user
-        [HttpPost]
-        public ActionResult Register(UserVM userVM)
-        {
-            using (Group13SSISEntities dc = new Group13SSISEntities())
-            {
-                ViewData["depts"] = dc.Depts.ToList();
-                ViewData["roles"] = dc.Roles.ToList();
-            }
-            if (ModelState.IsValid)
-            {
-                if (UsernameVerification.IsUsernameExist(userVM.Username))
-                {
-                    ModelState.AddModelError("Username", "Username already exist");
-                    return View(userVM);
-                }
-                User user = new User()
-                {
-                    Username = userVM.Username,
-                    Password = Crypto.Hash(userVM.Password),
-                    Name = userVM.Name,
-                    Email = userVM.Email,
-                    DeptId = Int32.Parse(userVM.DeptId),
-                    RoleId = Int32.Parse(userVM.RoleId)
-                };
-                using (Group13SSISEntities db = new Group13SSISEntities())
-                {
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                    return View(new UserVM());
-                }
-            }
-            return View();
-        }
+        
+        
 
         [HttpGet]
         public ActionResult Login()
@@ -79,7 +35,8 @@ namespace Group13SSIS.Controllers
                 else
                 {
                     Session["user"] = user;
-                    return RedirectToAction("index", "Home");
+                    if (user.RoleId == 1) return RedirectToAction("UserList", "Admin");
+                    else return RedirectToAction("index", "Home");
                 }
             }
 
@@ -89,18 +46,15 @@ namespace Group13SSIS.Controllers
         {
             return View();
         }
-
         public ActionResult Logout()
         {
             var user = (User)Session["user"];
             Session.Abandon();
             return RedirectToAction("Login", "Home");
         }
-
         public ActionResult Sorry()
         {
             return View();
         }
-
     }
 }

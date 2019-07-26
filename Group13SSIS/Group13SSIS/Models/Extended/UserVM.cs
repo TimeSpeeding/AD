@@ -8,6 +8,7 @@ namespace Group13SSIS.Models
 {
     public class UserVM
     {
+        public int UserId { get; set; }
         [Display(Name = "Username:")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Please enter username!")]
         public string Username { get; set; }

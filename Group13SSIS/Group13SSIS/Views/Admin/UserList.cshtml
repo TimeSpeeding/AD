@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "UserList";
+    var userlist = ViewData["userlist"] as List<Group13SSIS.Models.UserVM>;
+    var user = (Group13SSIS.Models.User)Session["user"];
+    if (user == null)
+    {
+        Response.Redirect("~/home/login");
+    }
+    else if (user.RoleId != 1)
+    {
+        Response.Redirect("~/home/sorry");
+    }
+}
+
+<h2>UserList</h2>
+
+<p>
+    @Html.ActionLink("Create New User", "Register")
+</p>
+
+<table class="table">
+    <tr>
+        <th>UserId</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Role</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in userlist) {
+    <tr>
+        <td>
+            @Html.DisplayFor(x => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeptId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoleId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) | 
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+        </td>
+    </tr>
+}
+
+</table>

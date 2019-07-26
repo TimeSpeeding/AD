@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="29b3b819770d4fe7a9886909127cac58" Name="Diagram1">
+      <Diagram DiagramId="29b3b819770d4fe7a9886909127cac58" Name="Diagram1" ZoomLevel="128">
         <EntityTypeShape EntityType="Group13SSISModel.Adjustment" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group13SSISModel.AdjustmentDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Group13SSISModel.CollectionPoint" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />

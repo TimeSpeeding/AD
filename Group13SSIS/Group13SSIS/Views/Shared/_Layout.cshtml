@@ -18,11 +18,17 @@
                 </button>
                 @Html.ActionLink("SSIS", "index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
-                </ul>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav"></ul>
+                @if (Session["user"] != null)
+                {
+                    var user = (Group13SSIS.Models.User)Session["user"];
+                    <ul class="nav navbar-nav">
+                        <li style="font-size:20px;padding-top:10px;color:aqua">
+                            Hello, @user.Name</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
