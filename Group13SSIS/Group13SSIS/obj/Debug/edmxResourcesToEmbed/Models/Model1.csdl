@@ -12,9 +12,9 @@
   </EntityType>
   <EntityType Name="AdjustmentDetail">
     <Key>
-      <PropertyRef Name="AdjustmentId" />
-      <PropertyRef Name="StationeryId" />
+      <PropertyRef Name="AdjustmentDetailId" />
     </Key>
+    <Property Name="AdjustmentDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="AdjustmentId" Type="Int32" Nullable="false" />
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
@@ -42,21 +42,6 @@
     <Property Name="RepId" Type="Int32" />
     <Property Name="PointId" Type="Int32" />
   </EntityType>
-  <EntityType Name="PermissionItem">
-    <Key>
-      <PropertyRef Name="PermissionId" />
-    </Key>
-    <Property Name="PermissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Route" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
-  <EntityType Name="PermissionList">
-    <Key>
-      <PropertyRef Name="RoleId" />
-      <PropertyRef Name="PermissionId" />
-    </Key>
-    <Property Name="RoleId" Type="Int32" Nullable="false" />
-    <Property Name="PermissionId" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="Reorder">
     <Key>
       <PropertyRef Name="ReorderId" />
@@ -70,28 +55,28 @@
   </EntityType>
   <EntityType Name="ReorderDetail">
     <Key>
-      <PropertyRef Name="ReorderId" />
-      <PropertyRef Name="StationeryId" />
+      <PropertyRef Name="ReorderDetailId" />
     </Key>
+    <Property Name="ReorderDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ReorderId" Type="Int32" Nullable="false" />
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="Qty" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Requisition">
     <Key>
-      <PropertyRef Name="ApplyId" />
+      <PropertyRef Name="RequisitionId" />
     </Key>
-    <Property Name="ApplyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequisitionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ApplicantId" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
   <EntityType Name="RequisitionDetail">
     <Key>
-      <PropertyRef Name="ApplyId" />
-      <PropertyRef Name="StationeryId" />
+      <PropertyRef Name="RequisititonDetailId" />
     </Key>
-    <Property Name="ApplyId" Type="Int32" Nullable="false" />
+    <Property Name="RequisititonDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequisitionId" Type="Int32" Nullable="false" />
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
   </EntityType>
@@ -131,22 +116,23 @@
   </EntityType>
   <EntityType Name="Supply">
     <Key>
-      <PropertyRef Name="StationeryId" />
-      <PropertyRef Name="SupplierId" />
+      <PropertyRef Name="SupplyDetailId" />
     </Key>
+    <Property Name="SupplyDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StationeryId" Type="Int32" Nullable="false" />
-    <Property Name="SupplierId" Type="Int32" Nullable="false" />
-    <Property Name="Sort" Type="Int32" Nullable="false" />
+    <Property Name="FirstSupplierId" Type="Int32" Nullable="false" />
+    <Property Name="SecondSupplierId" Type="Int32" Nullable="false" />
+    <Property Name="ThirdSupplierId" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagram">
+  <EntityType Name="SupplyDetail">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="SupplyDetailId" />
     </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="SupplyDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StationeryId" Type="Int32" Nullable="false" />
+    <Property Name="FirstSupplierId" Type="Int32" Nullable="false" />
+    <Property Name="SecondSupplierId" Type="Int32" Nullable="false" />
+    <Property Name="ThirdSupplierId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -165,8 +151,6 @@
     <EntitySet Name="AdjustmentDetails" EntityType="Self.AdjustmentDetail" />
     <EntitySet Name="CollectionPoints" EntityType="Self.CollectionPoint" />
     <EntitySet Name="Depts" EntityType="Self.Dept" />
-    <EntitySet Name="PermissionItems" EntityType="Self.PermissionItem" />
-    <EntitySet Name="PermissionLists" EntityType="Self.PermissionList" />
     <EntitySet Name="Reorders" EntityType="Self.Reorder" />
     <EntitySet Name="ReorderDetails" EntityType="Self.ReorderDetail" />
     <EntitySet Name="Requisitions" EntityType="Self.Requisition" />
@@ -175,7 +159,7 @@
     <EntitySet Name="Stationeries" EntityType="Self.Stationery" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
     <EntitySet Name="Supplies" EntityType="Self.Supply" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="SupplyDetails" EntityType="Self.SupplyDetail" />
     <EntitySet Name="Users" EntityType="Self.User" />
   </EntityContainer>
 </Schema>

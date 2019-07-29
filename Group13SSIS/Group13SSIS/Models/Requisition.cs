@@ -14,7 +14,7 @@ namespace Group13SSIS.Models
     
     public partial class Requisition
     {
-        public int ApplyId { get; set; }
+        public int RequisitionId { get; set; }
         public int ApplicantId { get; set; }
         public System.DateTime Date { get; set; }
         public string Status { get; set; }

@@ -14,6 +14,7 @@ namespace Group13SSIS.Models
     
     public partial class ReorderDetail
     {
+        public int ReorderDetailId { get; set; }
         public int ReorderId { get; set; }
         public int StationeryId { get; set; }
         public int Qty { get; set; }

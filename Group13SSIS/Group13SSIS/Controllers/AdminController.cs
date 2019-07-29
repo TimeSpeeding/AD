@@ -98,7 +98,29 @@ namespace Group13SSIS.Controllers
         [HttpPost]
         public ActionResult Edit(int id, UserVM userVM)
         {
-            return View();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
+                user.Username = userVM.Username;
+                user.Name = userVM.Name;
+                user.Email = userVM.Email;
+                user.Password = Crypto.Hash(userVM.Password);
+                user.RoleId = Int32.Parse(userVM.RoleId);
+                user.DeptId = Int32.Parse(userVM.DeptId);
+                db.SaveChanges();
+            }
+            return RedirectToAction("UserList");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
+                db.Users.Remove(user);
+                db.SaveChanges();
+            }
+            return RedirectToAction("UserList");
         }
     }
 }

@@ -14,7 +14,8 @@ namespace Group13SSIS.Models
     
     public partial class RequisitionDetail
     {
-        public int ApplyId { get; set; }
+        public int RequisititonDetailId { get; set; }
+        public int RequisitionId { get; set; }
         public int StationeryId { get; set; }
         public int Quantity { get; set; }
     }

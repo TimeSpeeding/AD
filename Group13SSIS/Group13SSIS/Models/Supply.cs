@@ -14,8 +14,10 @@ namespace Group13SSIS.Models
     
     public partial class Supply
     {
+        public int SupplyDetailId { get; set; }
         public int StationeryId { get; set; }
-        public int SupplierId { get; set; }
-        public int Sort { get; set; }
+        public int FirstSupplierId { get; set; }
+        public int SecondSupplierId { get; set; }
+        public int ThirdSupplierId { get; set; }
     }
 }

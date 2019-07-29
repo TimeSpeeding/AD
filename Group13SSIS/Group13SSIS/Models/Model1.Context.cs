@@ -29,8 +29,6 @@ namespace Group13SSIS.Models
         public virtual DbSet<AdjustmentDetail> AdjustmentDetails { get; set; }
         public virtual DbSet<CollectionPoint> CollectionPoints { get; set; }
         public virtual DbSet<Dept> Depts { get; set; }
-        public virtual DbSet<PermissionItem> PermissionItems { get; set; }
-        public virtual DbSet<PermissionList> PermissionLists { get; set; }
         public virtual DbSet<Reorder> Reorders { get; set; }
         public virtual DbSet<ReorderDetail> ReorderDetails { get; set; }
         public virtual DbSet<Requisition> Requisitions { get; set; }
@@ -39,7 +37,7 @@ namespace Group13SSIS.Models
         public virtual DbSet<Stationery> Stationeries { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<Supply> Supplies { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<SupplyDetail> SupplyDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Group13SSIS.Models
     
     public partial class AdjustmentDetail
     {
+        public int AdjustmentDetailId { get; set; }
         public int AdjustmentId { get; set; }
         public int StationeryId { get; set; }
         public int Qty { get; set; }

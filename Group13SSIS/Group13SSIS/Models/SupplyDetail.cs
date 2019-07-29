@@ -12,9 +12,12 @@ namespace Group13SSIS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PermissionItem
+    public partial class SupplyDetail
     {
-        public int PermissionId { get; set; }
-        public string Route { get; set; }
+        public int SupplyDetailId { get; set; }
+        public int StationeryId { get; set; }
+        public int FirstSupplierId { get; set; }
+        public int SecondSupplierId { get; set; }
+        public int ThirdSupplierId { get; set; }
     }
 }

@@ -15,6 +15,7 @@
     <EntitySetMapping Name="AdjustmentDetails">
       <EntityTypeMapping TypeName="Group13SSISModel.AdjustmentDetail">
         <MappingFragment StoreEntitySet="AdjustmentDetail">
+          <ScalarProperty Name="AdjustmentDetailId" ColumnName="AdjustmentDetailId" />
           <ScalarProperty Name="AdjustmentId" ColumnName="AdjustmentId" />
           <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
@@ -46,22 +47,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PermissionItems">
-      <EntityTypeMapping TypeName="Group13SSISModel.PermissionItem">
-        <MappingFragment StoreEntitySet="PermissionItem">
-          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
-          <ScalarProperty Name="Route" ColumnName="Route" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PermissionLists">
-      <EntityTypeMapping TypeName="Group13SSISModel.PermissionList">
-        <MappingFragment StoreEntitySet="PermissionList">
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-          <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Reorders">
       <EntityTypeMapping TypeName="Group13SSISModel.Reorder">
         <MappingFragment StoreEntitySet="Reorder">
@@ -77,6 +62,7 @@
     <EntitySetMapping Name="ReorderDetails">
       <EntityTypeMapping TypeName="Group13SSISModel.ReorderDetail">
         <MappingFragment StoreEntitySet="ReorderDetail">
+          <ScalarProperty Name="ReorderDetailId" ColumnName="ReorderDetailId" />
           <ScalarProperty Name="ReorderId" ColumnName="ReorderId" />
           <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
@@ -86,7 +72,7 @@
     <EntitySetMapping Name="Requisitions">
       <EntityTypeMapping TypeName="Group13SSISModel.Requisition">
         <MappingFragment StoreEntitySet="Requisition">
-          <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
+          <ScalarProperty Name="RequisitionId" ColumnName="RequisitionId" />
           <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Status" ColumnName="Status" />
@@ -96,7 +82,8 @@
     <EntitySetMapping Name="RequisitionDetails">
       <EntityTypeMapping TypeName="Group13SSISModel.RequisitionDetail">
         <MappingFragment StoreEntitySet="RequisitionDetail">
-          <ScalarProperty Name="ApplyId" ColumnName="ApplyId" />
+          <ScalarProperty Name="RequisititonDetailId" ColumnName="RequisititonDetailId" />
+          <ScalarProperty Name="RequisitionId" ColumnName="RequisitionId" />
           <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </MappingFragment>
@@ -142,20 +129,22 @@
     <EntitySetMapping Name="Supplies">
       <EntityTypeMapping TypeName="Group13SSISModel.Supply">
         <MappingFragment StoreEntitySet="Supply">
+          <ScalarProperty Name="SupplyDetailId" ColumnName="SupplyDetailId" />
           <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
-          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
-          <ScalarProperty Name="Sort" ColumnName="Sort" />
+          <ScalarProperty Name="FirstSupplierId" ColumnName="FirstSupplierId" />
+          <ScalarProperty Name="SecondSupplierId" ColumnName="SecondSupplierId" />
+          <ScalarProperty Name="ThirdSupplierId" ColumnName="ThirdSupplierId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="Group13SSISModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
+    <EntitySetMapping Name="SupplyDetails">
+      <EntityTypeMapping TypeName="Group13SSISModel.SupplyDetail">
+        <MappingFragment StoreEntitySet="SupplyDetail">
+          <ScalarProperty Name="SupplyDetailId" ColumnName="SupplyDetailId" />
+          <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
+          <ScalarProperty Name="FirstSupplierId" ColumnName="FirstSupplierId" />
+          <ScalarProperty Name="SecondSupplierId" ColumnName="SecondSupplierId" />
+          <ScalarProperty Name="ThirdSupplierId" ColumnName="ThirdSupplierId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
