@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "UserList";
-    var userlist = ViewData["userlist"] as List<Group13SSIS.Models.UserVM>;
+    Layout = "_AdminLayout.cshtml";
     var user = (Group13SSIS.Models.User)Session["user"];
     if (user == null)
     {
@@ -10,12 +10,14 @@
     {
         Response.Redirect("~/home/sorry");
     }
+
+    var userlist = ViewData["userlist"] as List<Group13SSIS.Models.UserVM>;
 }
 
 <h2>UserList</h2>
 
 <p>
-    @Html.ActionLink("Create New User", "Register")
+    @Html.ActionLink("Create New User", "CreateUser")
 </p>
 
 <table class="table">
@@ -50,8 +52,8 @@
             @Html.DisplayFor(modelItem => item.RoleId)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) | 
-            @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+            @Html.ActionLink("Edit", "EditUser", new { id = item.UserId }) | 
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.UserId })
         </td>
     </tr>
 }

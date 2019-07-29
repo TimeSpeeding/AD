@@ -1,9 +1,8 @@
 ﻿@model Group13SSIS.Models.UserVM
 
 @{
-    ViewBag.Title = "Edit";
-    var deptlist = ViewData["depts"] as List<Group13SSIS.Models.Dept>;
-    var rolelist = ViewData["roles"] as List<Group13SSIS.Models.Role>;
+    ViewBag.Title = "CreateUser";
+    Layout = "_AdminLayout.cshtml";
     var user = (Group13SSIS.Models.User)Session["user"];
     if (user == null)
     {
@@ -13,13 +12,17 @@
     {
         Response.Redirect("~/home/sorry");
     }
+
+    var deptlist = ViewData["depts"] as List<Group13SSIS.Models.Dept>;
+    var rolelist = ViewData["roles"] as List<Group13SSIS.Models.Role>;
 }
 
-<h2>Edit</h2>
+<h2>Register</h2>
 
 @using (Html.BeginForm())
 {
 <div class="form-horizontal">
+    <h4>User</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -61,14 +64,7 @@
                 <option>-- Please select a department --</option>
                 @foreach (var dept in deptlist)
                 {
-                    if (ViewBag.DeptId == dept.DeptId)
-                    {
-                        @:<option value="@dept.DeptId" selected>@dept.Name</option>
-                    }
-                    else
-                    {
-                        @:<option value="@dept.DeptId">@dept.Name</option>
-                    }
+                    @:<option value="@dept.DeptId">@dept.Name</option>
                 }
             </select>
             @Html.ValidationMessageFor(model => model.DeptId, "", new { @class = "text-danger" })
@@ -82,14 +78,7 @@
                 <option>-- Please select a role --</option>
                 @foreach (var role in rolelist)
                 {
-                    if (ViewBag.RoleId == role.RoleId)
-                    {
-                        @:<option value="@role.RoleId" selected>@role.Name</option>
-                    }
-                    else
-                    {
-                        @:<option value="@role.RoleId">@role.Name</option>
-                    }
+                    @:<option value="@role.RoleId">@role.Name</option>
                 }
             </select>
             @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
@@ -98,7 +87,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 </div>

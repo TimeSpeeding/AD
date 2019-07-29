@@ -35,7 +35,7 @@ namespace Group13SSIS.Controllers
         }
 
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult CreateUser()
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
@@ -45,7 +45,7 @@ namespace Group13SSIS.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Register(UserVM userVM)
+        public ActionResult CreateUser(UserVM userVM)
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
@@ -79,7 +79,7 @@ namespace Group13SSIS.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult EditUser(int id)
         {
             var userVM = new UserVM();
             using (Group13SSISEntities db = new Group13SSISEntities())
@@ -96,7 +96,7 @@ namespace Group13SSIS.Controllers
             return View(userVM);
         }
         [HttpPost]
-        public ActionResult Edit(int id, UserVM userVM)
+        public ActionResult EditUser(int id, UserVM userVM)
         {
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
@@ -112,7 +112,7 @@ namespace Group13SSIS.Controllers
             return RedirectToAction("UserList");
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult DeleteUser(int id)
         {
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
