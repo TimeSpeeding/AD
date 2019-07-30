@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "DeptList";
+    Layout = "_AdminLayout.cshtml";
+    var deptlist = ViewData["deptlist"] as List<Group13SSIS.Models.DeptVM>;
+}
+
+<h2>Department List</h2>
+
+<p>
+    @Html.ActionLink("Create New Department", "CreateDept")
+</p>
+
+<table class="table">
+    <tr>
+        <th>DepartmentId</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>ContactName</th>
+        <th>Tel</th>
+        <th>FaxNo</th>
+        <th>Head</th>
+        <th>Representative</th>
+        <th>Collection Point</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in deptlist) {
+    <tr>
+        <td>
+            @Html.DisplayFor(x => item.DeptId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FaxNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeadId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RepId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PointId)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditDept", new { id = item.DeptId }) |
+            @Html.ActionLink("Delete", "DeleteDept", new { id = item.DeptId })
+        </td>
+    </tr>
+}
+
+</table>

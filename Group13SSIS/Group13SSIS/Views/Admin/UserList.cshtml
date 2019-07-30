@@ -1,16 +1,6 @@
 ﻿@{
     ViewBag.Title = "UserList";
     Layout = "_AdminLayout.cshtml";
-    var user = (Group13SSIS.Models.User)Session["user"];
-    if (user == null)
-    {
-        Response.Redirect("~/home/login");
-    }
-    else if (user.RoleId != 1)
-    {
-        Response.Redirect("~/home/sorry");
-    }
-
     var userlist = ViewData["userlist"] as List<Group13SSIS.Models.UserVM>;
 }
 

@@ -3,16 +3,6 @@
 @{
     ViewBag.Title = "EditUser";
     Layout = "_AdminLayout.cshtml";
-    var user = (Group13SSIS.Models.User)Session["user"];
-    if (user == null)
-    {
-        Response.Redirect("~/home/login");
-    }
-    else if (user.RoleId != 1)
-    {
-        Response.Redirect("~/home/sorry");
-    }
-
     var deptlist = ViewData["depts"] as List<Group13SSIS.Models.Dept>;
     var rolelist = ViewData["roles"] as List<Group13SSIS.Models.Role>;
 }
@@ -60,7 +50,7 @@
         @Html.LabelFor(model => model.DeptId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <select id="DeptId" name="DeptId">
-                <option>-- Please select a department --</option>
+                <option value="">-- Please select a department --</option>
                 @foreach (var dept in deptlist)
                 {
                     if (ViewBag.DeptId == dept.DeptId)
@@ -81,7 +71,7 @@
         @Html.LabelFor(model => model.RoleId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <select id="RoleId" name="RoleId">
-                <option>-- Please select a role --</option>
+                <option value="">-- Please select a role --</option>
                 @foreach (var role in rolelist)
                 {
                     if (ViewBag.RoleId == role.RoleId)

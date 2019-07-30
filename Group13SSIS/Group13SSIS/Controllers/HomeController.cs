@@ -11,8 +11,6 @@ namespace Group13SSIS.Controllers
     public class HomeController : Controller
     {
         
-        
-
         [HttpGet]
         public ActionResult Login()
         {
@@ -35,7 +33,7 @@ namespace Group13SSIS.Controllers
                 else
                 {
                     Session["user"] = user;
-                    if (user.RoleId == 1) return RedirectToAction("UserList", "Admin");
+                    if (user.RoleId == 1) return RedirectToAction("Index", "Admin");
                     else return RedirectToAction("index", "Home");
                 }
             }
