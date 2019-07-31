@@ -10,7 +10,6 @@ namespace Group13SSIS.Controllers
 {
     public class HomeController : Controller
     {
-        
         [HttpGet]
         public ActionResult Login()
         {
@@ -23,7 +22,7 @@ namespace Group13SSIS.Controllers
             {
 
                 userVM.Password = Crypto.Hash(userVM.Password);
-                var user = db.Users.Where(x => x.Username == userVM.Username && x.Password == userVM.Password).FirstOrDefault();
+                var user = db.Users.Where(x => x.Username == userVM.Username && x.Password == userVM.Password && x.Status == "Activated").FirstOrDefault();
                 if (user == null)
                 {
                     ModelState.AddModelError("Password", "Username or password is incorrect");
@@ -34,11 +33,13 @@ namespace Group13SSIS.Controllers
                 {
                     Session["user"] = user;
                     if (user.RoleId == 1) return RedirectToAction("Index", "Admin");
+                    else if (user.RoleId == 6) return RedirectToAction("Index", "Manager");
                     else return RedirectToAction("index", "Home");
                 }
             }
 
         }
+
 
         public ActionResult Index()
         {

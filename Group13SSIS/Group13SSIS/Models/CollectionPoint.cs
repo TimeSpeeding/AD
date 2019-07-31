@@ -17,5 +17,6 @@ namespace Group13SSIS.Models
         public int PointId { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
+        public string Status { get; set; }
     }
 }

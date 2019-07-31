@@ -1,0 +1,42 @@
+﻿@{    
+    ViewBag.Title = "CollectionPointList";
+    Layout = "_ManagerLayout.cshtml";
+    var pointlist = ViewData["points"] as List<Group13SSIS.Models.CollectionPoint>;
+}
+
+<h2>CollectionPointList</h2>
+
+<p>
+    @Html.ActionLink("Create New Collection Point", "CreateCollectionPoint") 
+</p>
+
+<table class="table">
+    <tr>
+        <th>PointId</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in pointlist)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.PointId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>         
+            <td>
+                @Html.ActionLink("Edit", "EditCollectionPoint", new { id = item.PointId }) |
+                @Html.ActionLink("Delete", "DeleteCollectionPoint", new { id = item.PointId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

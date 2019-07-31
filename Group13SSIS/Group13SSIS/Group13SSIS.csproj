@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -145,7 +146,9 @@
     <Compile Include="Models\Dept.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\CollectionPoint.cs" />
     <Compile Include="Models\Extended\DeptVM.cs" />
+    <Compile Include="Models\Extended\Stationery.cs" />
     <Compile Include="Models\Extended\UserVM.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -257,9 +260,18 @@
     <Content Include="Views\Admin\DeptList.cshtml" />
     <Content Include="Views\Admin\CreateDept.cshtml" />
     <Content Include="Views\Admin\EditDept.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
+    <Content Include="Views\Manager\CollectionPointList.cshtml" />
+    <Content Include="Views\Manager\CreateCollectionPoint.cshtml" />
+    <Content Include="Views\Manager\CreateStationery.cshtml" />
+    <Content Include="Views\Manager\EditCollectionPoint.cshtml" />
+    <Content Include="Views\Manager\EditStationery.cshtml" />
+    <Content Include="Views\Manager\StationeryList.cshtml" />
+    <Content Include="Views\Manager\_ManagerLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Android\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

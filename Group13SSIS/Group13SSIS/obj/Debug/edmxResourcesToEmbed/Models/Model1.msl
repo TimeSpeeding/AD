@@ -29,6 +29,7 @@
           <ScalarProperty Name="PointId" ColumnName="PointId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -44,6 +45,7 @@
           <ScalarProperty Name="HeadId" ColumnName="HeadId" />
           <ScalarProperty Name="RepId" ColumnName="RepId" />
           <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -158,6 +160,7 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="DeptId" ColumnName="DeptId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

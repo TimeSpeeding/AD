@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "StationeryList";
+    Layout = "_ManagerLayout.cshtml";
+    var stationerylist = ViewData["stationery"] as List<Group13SSIS.Models.Stationery>;
+}
+
+<h2>StationeryList</h2>
+
+<p>
+    @Html.ActionLink("Create New Stationery", "CreateStationery")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>ReorderLevel</th>
+        <th>ReorderQty</th>
+        <th>UOM</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in stationerylist)
+    {
+    <tr>
+    <td>
+        @Html.DisplayFor(x => item.Code)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Qty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReorderLevel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReorderQty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UOM)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "EditStationery", new { id = item.StationeryId }) |
+        @Html.ActionLink("Delete", "DeleteStationery", new { id = item.StationeryId })
+    </td>
+    </tr>
+    }
+
+</table>
+
+

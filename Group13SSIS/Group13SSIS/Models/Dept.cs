@@ -23,5 +23,6 @@ namespace Group13SSIS.Models
         public Nullable<int> HeadId { get; set; }
         public Nullable<int> RepId { get; set; }
         public Nullable<int> PointId { get; set; }
+        public string Status { get; set; }
     }
 }

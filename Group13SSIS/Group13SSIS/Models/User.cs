@@ -21,5 +21,6 @@ namespace Group13SSIS.Models
         public string Email { get; set; }
         public int DeptId { get; set; }
         public int RoleId { get; set; }
+        public string Status { get; set; }
     }
 }

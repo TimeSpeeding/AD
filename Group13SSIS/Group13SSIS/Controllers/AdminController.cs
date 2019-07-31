@@ -24,16 +24,19 @@ namespace Group13SSIS.Controllers
                 var uservmlist = new List<UserVM>();
                 foreach (var user in userlist)
                 {
-                    uservmlist.Add(new UserVM()
+                    if(user.Status == "Activated")
                     {
-                        UserId = user.UserId,
-                        Username = user.Username,
-                        Password = user.Password,
-                        Name = user.Name,
-                        Email = user.Email,
-                        DeptId = db.Depts.Where(x => x.DeptId == user.DeptId).FirstOrDefault().Name,
-                        RoleId = db.Roles.Where(x => x.RoleId == user.RoleId).FirstOrDefault().Name
-                    });
+                        uservmlist.Add(new UserVM()
+                        {
+                            UserId = user.UserId,
+                            Username = user.Username,
+                            Password = user.Password,
+                            Name = user.Name,
+                            Email = user.Email,
+                            DeptId = db.Depts.Where(x => x.DeptId == user.DeptId).FirstOrDefault().Name,
+                            RoleId = db.Roles.Where(x => x.RoleId == user.RoleId).FirstOrDefault().Name
+                        });
+                    }
                 }
                 ViewData["userlist"] = uservmlist;
             }
@@ -44,7 +47,7 @@ namespace Group13SSIS.Controllers
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
-                ViewData["depts"] = dc.Depts.ToList();
+                ViewData["depts"] = dc.Depts.Where(x => x.Status == "Activated").ToList();
                 ViewData["roles"] = dc.Roles.ToList();
             }
             return View();
@@ -54,7 +57,7 @@ namespace Group13SSIS.Controllers
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
-                ViewData["depts"] = dc.Depts.ToList();
+                ViewData["depts"] = dc.Depts.Where(x => x.Status == "Activated").ToList();
                 ViewData["roles"] = dc.Roles.ToList();
             }
             if (ModelState.IsValid)
@@ -71,7 +74,8 @@ namespace Group13SSIS.Controllers
                     Name = userVM.Name,
                     Email = userVM.Email,
                     DeptId = Int32.Parse(userVM.DeptId),
-                    RoleId = Int32.Parse(userVM.RoleId)
+                    RoleId = Int32.Parse(userVM.RoleId),
+                    Status = "Activated"
                 };
                 using (Group13SSISEntities db = new Group13SSISEntities())
                 {
@@ -88,7 +92,7 @@ namespace Group13SSIS.Controllers
             var userVM = new UserVM();
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
-                ViewData["depts"] = db.Depts.ToList();
+                ViewData["depts"] = db.Depts.Where(x => x.Status == "Activated").ToList();
                 ViewData["roles"] = db.Roles.ToList();
                 var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
                 userVM.Username = user.Username;
@@ -104,7 +108,7 @@ namespace Group13SSIS.Controllers
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
-                ViewData["depts"] = dc.Depts.ToList();
+                ViewData["depts"] = dc.Depts.Where(x => x.Status == "Activated").ToList();
                 ViewData["roles"] = dc.Roles.ToList();
                 ViewBag.DeptId = Int32.Parse(userVM.DeptId);
                 ViewBag.RoleId = Int32.Parse(userVM.RoleId);
@@ -131,7 +135,7 @@ namespace Group13SSIS.Controllers
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
                 var user = db.Users.Where(x => x.UserId == id).FirstOrDefault();
-                db.Users.Remove(user);
+                user.Status = "Expired";
                 db.SaveChanges();
             }
             return RedirectToAction("UserList");
@@ -146,17 +150,20 @@ namespace Group13SSIS.Controllers
                 var deptvmlist = new List<DeptVM>();
                 foreach (var dept in deptlist)
                 {
-                    DeptVM deptVM = new DeptVM();
-                    deptVM.DeptId = dept.DeptId;
-                    deptVM.Code = dept.Code;
-                    deptVM.Name = dept.Name;
-                    deptVM.ContactName = dept.ContactName;
-                    deptVM.Tel = dept.Tel;
-                    deptVM.FaxNo = dept.FaxNo;
-                    if (dept.HeadId != null) deptVM.HeadId = db.Users.Where(x => x.UserId == dept.HeadId).FirstOrDefault().Name;
-                    if (dept.RepId != null) deptVM.RepId = db.Users.Where(x => x.UserId == dept.RepId).FirstOrDefault().Name;
-                    if (dept.PointId != null) deptVM.PointId = db.CollectionPoints.Where(x => x.PointId == dept.PointId).FirstOrDefault().Name;
-                    deptvmlist.Add(deptVM);
+                    if (dept.Status == "Activated")
+                    {
+                        DeptVM deptVM = new DeptVM();
+                        deptVM.DeptId = dept.DeptId;
+                        deptVM.Code = dept.Code;
+                        deptVM.Name = dept.Name;
+                        deptVM.ContactName = dept.ContactName;
+                        deptVM.Tel = dept.Tel;
+                        deptVM.FaxNo = dept.FaxNo;
+                        if (dept.HeadId != null) deptVM.HeadId = db.Users.Where(x => x.UserId == dept.HeadId).FirstOrDefault().Name;
+                        if (dept.RepId != null) deptVM.RepId = db.Users.Where(x => x.UserId == dept.RepId).FirstOrDefault().Name;
+                        if (dept.PointId != null) deptVM.PointId = db.CollectionPoints.Where(x => x.PointId == dept.PointId).FirstOrDefault().Name;
+                        deptvmlist.Add(deptVM);
+                    }
                 }
                 ViewData["deptlist"] = deptvmlist;
             }
@@ -178,7 +185,8 @@ namespace Group13SSIS.Controllers
                     Name = deptVM.Name,
                     ContactName = deptVM.ContactName,
                     Tel = deptVM.Tel,
-                    FaxNo = deptVM.FaxNo
+                    FaxNo = deptVM.FaxNo,
+                    Status = "Activated"
                 };
                 using (Group13SSISEntities db = new Group13SSISEntities())
                 {
@@ -195,9 +203,9 @@ namespace Group13SSIS.Controllers
             DeptVM deptVM = new DeptVM();
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
-                ViewData["heads"] = db.Users.Where(x => x.RoleId == 3 && x.DeptId == id).ToList();
-                ViewData["reps"] = db.Users.Where(x => x.RoleId == 2 && x.DeptId == id).ToList();
-                ViewData["points"] = db.CollectionPoints.ToList();
+                ViewData["heads"] = db.Users.Where(x => x.RoleId == 3 && x.DeptId == id && x.Status == "Activated").ToList();
+                ViewData["reps"] = db.Users.Where(x => x.RoleId == 2 && x.DeptId == id && x.Status == "Activated").ToList();
+                ViewData["points"] = db.CollectionPoints.Where(x => x.Status == "Activated").ToList();
                 var dept = db.Depts.Where(x => x.DeptId == id).FirstOrDefault();
                 deptVM.Code = dept.Code;
                 deptVM.Name = dept.Name;
@@ -215,9 +223,9 @@ namespace Group13SSIS.Controllers
         {
             using (Group13SSISEntities dc = new Group13SSISEntities())
             {
-                ViewData["heads"] = dc.Users.Where(x => x.RoleId == 3 && x.DeptId == id).ToList();
-                ViewData["reps"] = dc.Users.Where(x => x.RoleId == 2 && x.DeptId == id).ToList();
-                ViewData["points"] = dc.CollectionPoints.ToList();
+                ViewData["heads"] = dc.Users.Where(x => x.RoleId == 3 && x.DeptId == id && x.Status == "Activated").ToList();
+                ViewData["reps"] = dc.Users.Where(x => x.RoleId == 2 && x.DeptId == id && x.Status == "Activated").ToList();
+                ViewData["points"] = dc.CollectionPoints.Where(x => x.Status == "Activated").ToList();
                 if (deptVM.HeadId != null) ViewBag.HeadId = Int32.Parse(deptVM.HeadId);
                 if (deptVM.RepId != null) ViewBag.RepId = Int32.Parse(deptVM.RepId);
                 if (deptVM.PointId != null) ViewBag.PointId = Int32.Parse(deptVM.PointId);
@@ -249,7 +257,7 @@ namespace Group13SSIS.Controllers
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
                 var dept = db.Depts.Where(x => x.DeptId == id).FirstOrDefault();
-                db.Depts.Remove(dept);
+                dept.Status = "Expired";
                 db.SaveChanges();
             }
             return RedirectToAction("DeptList");
