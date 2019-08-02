@@ -1,14 +1,27 @@
-﻿@{
+﻿@model Group13SSIS.Models.StationeryVM
+@using PagedList.Mvc
+
+@{
     ViewBag.Title = "StationeryList";
     Layout = "_ManagerLayout.cshtml";
-    var stationerylist = ViewData["stationery"] as List<Group13SSIS.Models.Stationery>;
 }
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <h2>StationeryList</h2>
 
 <p>
     @Html.ActionLink("Create New Stationery", "CreateStationery")
 </p>
+
+@using (Html.BeginForm("StationeryList", "Manager", FormMethod.Get))
+{
+    <p>
+        Category: @Html.DropDownList("Category", "All")
+        Find by Description: @Html.TextBox("Search")
+        <input type="submit" value="search" />
+    </p>
+}
 
 <table class="table">
     <tr>
@@ -23,40 +36,42 @@
         <th>Action</th>
     </tr>
 
-    @foreach (var item in stationerylist)
+    @foreach (var item in Model.Stationeries)
     {
-    <tr>
-    <td>
-        @Html.DisplayFor(x => item.Code)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Description)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Category)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Qty)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ReorderLevel)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ReorderQty)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.UOM)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "EditStationery", new { id = item.StationeryId }) |
-        @Html.ActionLink("Delete", "DeleteStationery", new { id = item.StationeryId })
-    </td>
-    </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReorderLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReorderQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UOM)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditStationery", new { id = item.StationeryId }) |
+                @Html.ActionLink("Delete", "DeleteStationery", new { id = item.StationeryId })
+            </td>
+        </tr>
     }
 
 </table>
 
-
+<br />
+Page @(Model.Stationeries.PageCount < Model.Stationeries.PageNumber ? 0 : Model.Stationeries.PageNumber) of @Model.Stationeries.PageCount
+@Html.PagedListPager(Model.Stationeries, page => Url.Action("StationeryList", new { Category = Model.Category, Search = Model.Search, page }))

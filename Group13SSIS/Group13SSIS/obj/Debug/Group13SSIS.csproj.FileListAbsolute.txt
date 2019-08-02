@@ -78,3 +78,7 @@ C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\obj\Debug\G
 C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\obj\Debug\Group13SSIS.csproj.CopyComplete
 C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\obj\Debug\Group13SSIS.dll
 C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\obj\Debug\Group13SSIS.pdb
+C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\bin\PagedList.dll
+C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\bin\PagedList.Mvc.dll
+C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\bin\PagedList.xml
+C:\Users\TimeSpeeding\Google Drive\SA4106\AD\Group13SSIS\Group13SSIS\bin\PagedList.Mvc.xml

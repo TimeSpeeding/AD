@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Group13SSIS.Models;
 using Group13SSIS.Utility;
+using PagedList;
 
 namespace Group13SSIS.Controllers
 {
@@ -81,14 +82,32 @@ namespace Group13SSIS.Controllers
         }
 
 
-        public ActionResult StationeryList()
+        public ActionResult StationeryList(string Category, string Search, int? page)
         {
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
-                var stationerylist = db.Stationeries.ToList();
-                ViewData["stationery"] = stationerylist;
+                var cateLst = db.Stationeries.Select(x => x.Category).Distinct().ToList();
+                ViewBag.Category = new SelectList(cateLst);
+                var stationeries = db.Stationeries.ToList();
+                if (!String.IsNullOrEmpty(Category))
+                {
+                    stationeries = stationeries.Where(x => x.Category == Category).ToList();
+                }
+                if (!String.IsNullOrEmpty(Search))
+                {
+                    stationeries = stationeries.Where(s => s.Description.ToLower().Contains(Search.ToLower())).ToList();
+                }
+                const int pageItems = 20;
+                int currentPage = (page ?? 1);
+                IPagedList<Stationery> pageStationeries = stationeries.ToPagedList(currentPage, pageItems);
+                StationeryVM stationeryVM = new StationeryVM()
+                {
+                    Stationeries = pageStationeries,
+                    Category = Category,
+                    Search = Search
+                };
+                return View(stationeryVM);
             }
-            return View();
         }
         [HttpGet]
         public ActionResult CreateStationery()
