@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "SupplierList";
+    Layout = "_ManagerLayout.cshtml";
+    var supplierlist = ViewData["supplierlist"] as List<Group13SSIS.Models.Supplier>;
+}
+
+<h2>SupplierList</h2>
+
+<p>
+    @Html.ActionLink("Create New Supplier", "CreateSupplier")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>GSTNo</th>
+        <th>ContactName</th>
+        <th>PhoneNo</th>
+        <th>FaxNo</th>
+        <th>Address</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in supplierlist) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Code)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GSTNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ContactName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FaxNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "EditSupplier", new { id = item.SupplierId }) |
+        @Html.ActionLink("Delete", "DeleteSupplier", new { id = item.SupplierId })
+    </td>
+</tr>
+}
+
+</table>

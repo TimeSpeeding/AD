@@ -153,6 +153,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Extended\CollectionPoint.cs" />
+    <Compile Include="Models\Extended\Supplier.cs" />
     <Compile Include="Models\Extended\DeptVM.cs" />
     <Compile Include="Models\Extended\Stationery.cs" />
     <Compile Include="Models\Extended\StationeryVM.cs" />
@@ -276,6 +277,9 @@
     <Content Include="Views\Manager\EditStationery.cshtml" />
     <Content Include="Views\Manager\StationeryList.cshtml" />
     <Content Include="Views\Manager\_ManagerLayout.cshtml" />
+    <Content Include="Views\Manager\CreateSupplier.cshtml" />
+    <Content Include="Views\Manager\EditSupplier.cshtml" />
+    <Content Include="Views\Manager\SupplierList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

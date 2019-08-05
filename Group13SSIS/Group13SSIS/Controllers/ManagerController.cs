@@ -170,5 +170,74 @@ namespace Group13SSIS.Controllers
             }
             return RedirectToAction("StationeryList");
         }
+
+        public ActionResult SupplierList()
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var supplierlist = db.Suppliers.ToList();
+                ViewData["supplierlist"] = supplierlist;
+            }
+            return View();
+        }
+        [HttpGet]
+        public ActionResult CreateSupplier()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateSupplier(Supplier supplier)
+        {
+            if (ModelState.IsValid)
+            {
+                using (Group13SSISEntities db = new Group13SSISEntities())
+                {
+                    db.Suppliers.Add(supplier);
+                    db.SaveChanges();
+                    return RedirectToAction("SupplierList");
+                }
+            }
+            return View();
+        }
+        [HttpGet]
+        public ActionResult EditSupplier(int id)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var supplier = db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault();
+                return View(supplier);
+            }
+        }
+        [HttpPost]
+        public ActionResult EditSupplier(int id, Supplier supplier0)
+        {
+            if (ModelState.IsValid)
+            {
+                using (Group13SSISEntities db = new Group13SSISEntities())
+                {
+                    var supplier = db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault();
+                    supplier.Code = supplier0.Code;
+                    supplier.Name = supplier0.Name;
+                    supplier.GSTNo = supplier0.GSTNo;
+                    supplier.ContactName = supplier0.ContactName;
+                    supplier.PhoneNo = supplier0.PhoneNo;
+                    supplier.FaxNo = supplier0.FaxNo;
+                    supplier.Address = supplier0.Address;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("SupplierList");
+            }
+            return View(supplier0);
+        }
+        public ActionResult DeleteSupplier(int id)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var supplier = db.Suppliers.Where(x => x.SupplierId == id).FirstOrDefault();
+                db.Suppliers.Remove(supplier);
+                db.SaveChanges();
+            }
+            return RedirectToAction("SupplierList");
+        }
     }
 }
