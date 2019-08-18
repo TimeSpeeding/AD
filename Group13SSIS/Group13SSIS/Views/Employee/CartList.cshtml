@@ -1,0 +1,100 @@
+﻿@model Group13SSIS.Models.Cart
+
+@{
+    ViewBag.Title = "CartList";
+    Layout = "_EmployeeLayout.cshtml";
+    var cartlist = ViewData["cartlist"] as List<Group13SSIS.Models.CartLine>;
+    double sum = 0;
+}
+<link href="~/Content/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+
+<h2>Cart</h2>
+
+<table class="table">
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>UOM</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+    </tr>
+
+    @foreach (var item in cartlist)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Stationery.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.UOM)
+            </td>
+            <td>
+                <input type="hidden" id="id" name="id" value=@item.Stationery.StationeryId />
+                <input class="demo2" type="text" value="@item.Qty" name="demo2" />
+            </td>
+            <td>
+                @(item.Stationery.Price * item.Qty)
+                @{
+                    sum = sum + item.Stationery.Price * item.Qty;
+                }
+            </td>
+            <td>
+                @using (Html.BeginForm("RemoveFromCart", "Employee"))
+                {
+                    <input type="hidden" id="id" name="id" value=@item.Stationery.StationeryId />
+                    <input type="submit" value="Remove" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="text-center" style="font-size: 30px;font-weight: bold;color: red;">
+    <span>Total: </span> @sum
+</div>
+
+@using (Html.BeginForm("CreateRequisition", "Employee"))
+{
+    <input type="submit" value="Submit" />
+}
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery.bootstrap-touchspin.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var i = $("input[class='demo2']");
+            i.TouchSpin({
+                min: 1,
+                max: 1000
+            });
+            i.on("touchspin.on.stopupspin", function () {
+                $.post('@Url.Action("IncreaseOrDecreaseOne", "Employee")', { "id": $("#id").val(), "quantity": $(this).val() }, function (data) {
+                    if (data.msg) {
+                        location.reload();
+                    }
+                });
+            });
+            i.on("touchspin.on.stopdownspin", function () {
+                $.post('@Url.Action("IncreaseOrDecreaseOne", "Employee")', { "id": $('#id').val(), "quantity": $(this).val() }, function (data) {
+                    if (data.msg) {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+}

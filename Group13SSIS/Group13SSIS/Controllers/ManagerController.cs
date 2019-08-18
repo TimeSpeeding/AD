@@ -171,6 +171,7 @@ namespace Group13SSIS.Controllers
             return RedirectToAction("StationeryList");
         }
 
+
         public ActionResult SupplierList()
         {
             using (Group13SSISEntities db = new Group13SSISEntities())
@@ -238,6 +239,107 @@ namespace Group13SSIS.Controllers
                 db.SaveChanges();
             }
             return RedirectToAction("SupplierList");
+        }
+
+
+        public ActionResult SupplyDetailList()
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var supplyDetailList = db.SupplyDetails.ToList();
+                List<SupplyDetailVM> supplyDetailVMs = new List<SupplyDetailVM>();
+                foreach (var supplyDetail in supplyDetailList)
+                {
+                    var supplyDetailVM = new SupplyDetailVM()
+                    {
+                        SupplyDetailId = supplyDetail.SupplyDetailId,
+                        StationeryId = db.Stationeries.Where(x => x.StationeryId == supplyDetail.StationeryId).FirstOrDefault().Description,
+                        FirstSupplierId = db.Suppliers.Where(x => x.SupplierId == supplyDetail.FirstSupplierId).FirstOrDefault().Name,
+                        SecondSupplierId = db.Suppliers.Where(x => x.SupplierId == supplyDetail.SecondSupplierId).FirstOrDefault().Name,
+                        ThirdSupplierId = db.Suppliers.Where(x => x.SupplierId == supplyDetail.ThirdSupplierId).FirstOrDefault().Name
+                    };
+                    supplyDetailVMs.Add(supplyDetailVM);
+                }
+                ViewData["supplydetails"] = supplyDetailVMs;
+            }
+            return View();
+        }
+        public ActionResult SelectStationery(string Category, string Search, int? page)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var cateLst = db.Stationeries.Select(x => x.Category).Distinct().ToList();
+                ViewBag.Category = new SelectList(cateLst);
+                var existList = db.SupplyDetails.Select(x => x.StationeryId).ToList();
+                var stationeries = db.Stationeries.Where(x => !existList.Contains(x.StationeryId)).ToList();
+                if (!String.IsNullOrEmpty(Category))
+                {
+                    stationeries = stationeries.Where(x => x.Category == Category).ToList();
+                }
+                if (!String.IsNullOrEmpty(Search))
+                {
+                    stationeries = stationeries.Where(s => s.Description.ToLower().Contains(Search.ToLower())).ToList();
+                }
+                const int pageItems = 20;
+                int currentPage = (page ?? 1);
+                IPagedList<Stationery> pageStationeries = stationeries.ToPagedList(currentPage, pageItems);
+                StationeryVM stationeryVM = new StationeryVM()
+                {
+                    Stationeries = pageStationeries,
+                    Category = Category,
+                    Search = Search
+                };
+                return View(stationeryVM);
+            }
+        }
+        [HttpGet]
+        public ActionResult CreateSupplyDetail(string stationeryId)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                int id = Int32.Parse(stationeryId);
+                var stationery = db.Stationeries.Where(x => x.StationeryId == id).FirstOrDefault();
+                var suppliers = db.Suppliers.ToList();
+                ViewData["stationery"] = stationery;
+                ViewData["suppliers"] = suppliers;
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateSupplyDetail(string stationeryId, SupplyDetailVM supplyDetailVM)
+        {
+            using (Group13SSISEntities dc = new Group13SSISEntities())
+            {
+                int id = Int32.Parse(stationeryId);
+                var stationery = dc.Stationeries.Where(x => x.StationeryId == id).FirstOrDefault();
+                var suppliers = dc.Suppliers.ToList();
+                ViewData["stationery"] = stationery;
+                ViewData["suppliers"] = suppliers;
+            }
+            if (ModelState.IsValid)
+            {
+                if(supplyDetailVM.SecondSupplierId == supplyDetailVM.FirstSupplierId
+                    || supplyDetailVM.SecondSupplierId == supplyDetailVM.ThirdSupplierId
+                    || supplyDetailVM.ThirdSupplierId == supplyDetailVM.FirstSupplierId)
+                {
+                    ModelState.AddModelError("FirstSupplierId", "These suppliers cannot be same!");
+                    return View(supplyDetailVM);
+                }
+                SupplyDetail supply = new SupplyDetail()
+                {
+                    StationeryId = Int32.Parse(stationeryId),
+                    FirstSupplierId = Int32.Parse(supplyDetailVM.FirstSupplierId),
+                    SecondSupplierId = Int32.Parse(supplyDetailVM.SecondSupplierId),
+                    ThirdSupplierId = Int32.Parse(supplyDetailVM.ThirdSupplierId)
+                };
+                using (Group13SSISEntities db = new Group13SSISEntities())
+                {
+                    db.SupplyDetails.Add(supply);
+                    db.SaveChanges();
+                    return RedirectToAction("SupplyDetailList");
+                }
+            }
+            return View(supplyDetailVM);
         }
     }
 }

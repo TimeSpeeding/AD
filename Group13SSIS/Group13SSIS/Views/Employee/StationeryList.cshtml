@@ -1,0 +1,66 @@
+﻿@model Group13SSIS.Models.StationeryVM
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "StationeryList";
+    Layout = "_EmployeeLayout.cshtml";
+}
+
+<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<h2>StationeryList</h2>
+
+
+@using (Html.BeginForm("StationeryList", "Employee", FormMethod.Get))
+{
+    <p>
+        Category: @Html.DropDownList("Category", "All")
+        Find by Description: @Html.TextBox("Search")
+        <input type="submit" value="search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>UOM</th>
+        <th>Action</th>
+    </tr>
+
+    @foreach (var item in Model.Stationeries)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UOM)
+            </td>
+            <td>
+                @using (Html.BeginForm("AddtoCart", "Employee"))
+                {
+                    <input type="hidden" id="id" name="id" value=@item.StationeryId />
+                    <input type="number" id="qty" name="qty" />
+                    <input type="submit" value="Add" />
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<br />
+Page @(Model.Stationeries.PageCount < Model.Stationeries.PageNumber ? 0 : Model.Stationeries.PageNumber) of @Model.Stationeries.PageCount
+@Html.PagedListPager(Model.Stationeries, page => Url.Action("StationeryList", new { Category = Model.Category, Search = Model.Search, page }))

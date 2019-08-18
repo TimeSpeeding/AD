@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "SupplyDetailList";
+    Layout = "_ManagerLayout.cshtml";
+    var supplylist = ViewData["supplydetails"] as List<Group13SSIS.Models.SupplyDetailVM>;
+}
+
+<h2>SupplyDetailList</h2>
+
+<p>
+    @Html.ActionLink("Create New Supply Detail", "SelectStationery")
+</p>
+
+<table class="table">
+    <tr>
+        <th>Stationery</th>
+        <th>First Supplier</th>
+        <th>Second Supplier</th>
+        <th>Third Supplier</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in supplylist) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.StationeryId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstSupplierId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SecondSupplierId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ThirdSupplierId)
+    </td>
+    
+    <td>
+        @Html.ActionLink("Edit", "EditSupplyDetail", new { id = item.SupplyDetailId}) |
+        @Html.ActionLink("Delete", "DeleteSupplyDetail", new { id = item.SupplyDetailId})
+    </td>
+</tr>
+}
+
+</table>

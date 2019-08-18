@@ -36,7 +36,6 @@ namespace Group13SSIS.Models
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Stationery> Stationeries { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<Supply> Supplies { get; set; }
         public virtual DbSet<SupplyDetail> SupplyDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
