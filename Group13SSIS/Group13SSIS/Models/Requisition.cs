@@ -18,5 +18,6 @@ namespace Group13SSIS.Models
         public int ApplicantId { get; set; }
         public System.DateTime Date { get; set; }
         public string Status { get; set; }
+        public string RejectReason { get; set; }
     }
 }

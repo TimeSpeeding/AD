@@ -72,6 +72,7 @@
     <Property Name="ApplicantId" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RejectReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="RequisitionDetail">
     <Key>
@@ -116,16 +117,6 @@
     <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="Supply">
-    <Key>
-      <PropertyRef Name="SupplyDetailId" />
-    </Key>
-    <Property Name="SupplyDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="StationeryId" Type="Int32" Nullable="false" />
-    <Property Name="FirstSupplierId" Type="Int32" Nullable="false" />
-    <Property Name="SecondSupplierId" Type="Int32" Nullable="false" />
-    <Property Name="ThirdSupplierId" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="SupplyDetail">
     <Key>
       <PropertyRef Name="SupplyDetailId" />
@@ -161,7 +152,6 @@
     <EntitySet Name="Roles" EntityType="Self.Role" />
     <EntitySet Name="Stationeries" EntityType="Self.Stationery" />
     <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
-    <EntitySet Name="Supplies" EntityType="Self.Supply" />
     <EntitySet Name="SupplyDetails" EntityType="Self.SupplyDetail" />
     <EntitySet Name="Users" EntityType="Self.User" />
   </EntityContainer>

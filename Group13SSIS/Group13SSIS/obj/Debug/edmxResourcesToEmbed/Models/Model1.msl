@@ -78,6 +78,7 @@
           <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -125,17 +126,6 @@
           <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
           <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
           <ScalarProperty Name="Address" ColumnName="Address" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Supplies">
-      <EntityTypeMapping TypeName="Group13SSISModel.Supply">
-        <MappingFragment StoreEntitySet="Supply">
-          <ScalarProperty Name="SupplyDetailId" ColumnName="SupplyDetailId" />
-          <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
-          <ScalarProperty Name="FirstSupplierId" ColumnName="FirstSupplierId" />
-          <ScalarProperty Name="SecondSupplierId" ColumnName="SecondSupplierId" />
-          <ScalarProperty Name="ThirdSupplierId" ColumnName="ThirdSupplierId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

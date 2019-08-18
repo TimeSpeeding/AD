@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "RequisitionList";
+    Layout = "_HeadLayout.cshtml";
+    var requisitionlist = ViewData["requisitionlist"] as List<Group13SSIS.Models.RequisitionVM>;
+}
+
+<h2>RequisitionList</h2>
+
+<table class="table">
+    <tr>
+        <th>RequisitionId</th>
+        <th>Applicant</th>
+        <th>Submit Date</th>
+        <th>Status</th>
+        <th>Reject Reason</th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in requisitionlist) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequisitionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApplicantId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RejectReason)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "RequisitionDetails", new { id = item.RequisitionId })
+            @if (item.Status == "Applied")
+            {
+                @: | 
+                @Html.ActionLink("Approve", "ApproveRequisition", new { id = item.RequisitionId })
+                @: | 
+                @Html.ActionLink("Reject", "RejectRequisition", new { id = item.RequisitionId })
+            }
+        </td>
+    </tr>
+}
+
+</table>

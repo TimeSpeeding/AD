@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Setting";
+    Layout = "~/Views/Head/_HeadLayout.cshtml";
+    var rep = ViewData["rep"] as Group13SSIS.Models.User;
+    var cp = ViewData["cp"] as Group13SSIS.Models.CollectionPoint;
+    var reps = ViewData["reps"] as List<Group13SSIS.Models.User>;
+    var cps = ViewData["cps"] as List<Group13SSIS.Models.CollectionPoint>;
+}
+
+<h2>Setting</h2>
+
+<table>
+
+    <tr>
+        <th>Representative:</th>
+        <td>
+            @if(rep != null)
+            {
+                @rep.Name
+            }
+        </td>
+        <td>
+            @using (Html.BeginForm("SetRep", "Head"))
+            {
+                <select id="rep" name="rep">
+                    <option value=@null>-- Please select a representative --</option>
+                    @foreach (var item in reps)
+                    {
+                        <option value=@item.UserId>@item.Name</option>
+                    }
+                </select>
+                <input type="submit" value="Change" />
+            }
+        </td>
+    </tr>
+
+    <tr></tr>
+
+    <tr>
+        <th>Collection Point:</th>
+        <td>
+            @if (cp != null)
+            {
+                @cp.Name
+            }
+        </td>
+        <td>
+            @using (Html.BeginForm("SetCp", "Head"))
+            {
+                <select id="cp" name="cp">
+                    <option value="">-- Please select a collection point --</option>
+                    @foreach (var item in cps)
+                    {
+                        <option value=@item.PointId>@item.Name</option>
+                    }
+                </select>
+                <input type="submit" value="Change" />
+            }
+        </td>
+    </tr>
+
+</table>

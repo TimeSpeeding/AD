@@ -72,6 +72,7 @@
     <Property Name="ApplicantId" Type="int" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RejectReason" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="RequisitionDetail">
     <Key>
@@ -116,16 +117,6 @@
     <Property Name="FaxNo" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Supply">
-    <Key>
-      <PropertyRef Name="SupplyDetailId" />
-    </Key>
-    <Property Name="SupplyDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="StationeryId" Type="int" Nullable="false" />
-    <Property Name="FirstSupplierId" Type="int" Nullable="false" />
-    <Property Name="SecondSupplierId" Type="int" Nullable="false" />
-    <Property Name="ThirdSupplierId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="SupplyDetail">
     <Key>
       <PropertyRef Name="SupplyDetailId" />
@@ -161,7 +152,6 @@
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Stationery" EntityType="Self.Stationery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplyDetail" EntityType="Self.SupplyDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
   </EntityContainer>

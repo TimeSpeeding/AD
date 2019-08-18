@@ -77,6 +77,7 @@
           <Property Name="ApplicantId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RejectReason" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="RequisitionDetail">
           <Key>
@@ -121,16 +122,6 @@
           <Property Name="FaxNo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
-        <EntityType Name="Supply">
-          <Key>
-            <PropertyRef Name="SupplyDetailId" />
-          </Key>
-          <Property Name="SupplyDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StationeryId" Type="int" Nullable="false" />
-          <Property Name="FirstSupplierId" Type="int" Nullable="false" />
-          <Property Name="SecondSupplierId" Type="int" Nullable="false" />
-          <Property Name="ThirdSupplierId" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="SupplyDetail">
           <Key>
             <PropertyRef Name="SupplyDetailId" />
@@ -166,7 +157,6 @@
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stationery" EntityType="Self.Stationery" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplyDetail" EntityType="Self.SupplyDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -247,6 +237,7 @@
           <Property Name="ApplicantId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RejectReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RequisitionDetail">
           <Key>
@@ -291,16 +282,6 @@
           <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="Supply">
-          <Key>
-            <PropertyRef Name="SupplyDetailId" />
-          </Key>
-          <Property Name="SupplyDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StationeryId" Type="Int32" Nullable="false" />
-          <Property Name="FirstSupplierId" Type="Int32" Nullable="false" />
-          <Property Name="SecondSupplierId" Type="Int32" Nullable="false" />
-          <Property Name="ThirdSupplierId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="SupplyDetail">
           <Key>
             <PropertyRef Name="SupplyDetailId" />
@@ -336,7 +317,6 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Stationeries" EntityType="Self.Stationery" />
           <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
-          <EntitySet Name="Supplies" EntityType="Self.Supply" />
           <EntitySet Name="SupplyDetails" EntityType="Self.SupplyDetail" />
           <EntitySet Name="Users" EntityType="Self.User" />
         </EntityContainer>
@@ -423,6 +403,7 @@
                 <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RejectReason" ColumnName="RejectReason" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -470,17 +451,6 @@
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Supplies">
-            <EntityTypeMapping TypeName="Group13SSISModel.Supply">
-              <MappingFragment StoreEntitySet="Supply">
-                <ScalarProperty Name="SupplyDetailId" ColumnName="SupplyDetailId" />
-                <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
-                <ScalarProperty Name="FirstSupplierId" ColumnName="FirstSupplierId" />
-                <ScalarProperty Name="SecondSupplierId" ColumnName="SecondSupplierId" />
-                <ScalarProperty Name="ThirdSupplierId" ColumnName="ThirdSupplierId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

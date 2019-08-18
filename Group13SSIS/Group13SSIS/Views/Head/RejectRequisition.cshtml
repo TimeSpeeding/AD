@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "RejectRequisition";
+    Layout = "~/Views/Head/_HeadLayout.cshtml";
+}
+
+<h2>Why you want to reject this requisition?</h2>
+
+@using (Html.BeginForm("RejectRequisition", "Head", FormMethod.Post))
+{
+    <p>
+        <input type="text" id="reason" name="reason" />
+        <input type="submit" value="submit" />
+    </p>
+}

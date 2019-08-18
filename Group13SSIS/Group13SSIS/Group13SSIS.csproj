@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HeadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
     <Compile Include="Global.asax.cs">
@@ -156,6 +157,7 @@
     <Compile Include="Models\Extended\Cart.cs" />
     <Compile Include="Models\Extended\CartLine.cs" />
     <Compile Include="Models\Extended\CollectionPoint.cs" />
+    <Compile Include="Models\Extended\RequisitionVM.cs" />
     <Compile Include="Models\Extended\Supplier.cs" />
     <Compile Include="Models\Extended\DeptVM.cs" />
     <Compile Include="Models\Extended\Stationery.cs" />
@@ -294,6 +296,12 @@
     <Content Include="Views\Employee\CartList.cshtml" />
     <Content Include="Views\Employee\RequisitionList.cshtml" />
     <Content Include="Views\Employee\RequisitionDetails.cshtml" />
+    <Content Include="Views\Head\_HeadLayout.cshtml" />
+    <Content Include="Views\Head\Index.cshtml" />
+    <Content Include="Views\Head\RequisitionList.cshtml" />
+    <Content Include="Views\Head\RequisitionDetails.cshtml" />
+    <Content Include="Views\Head\RejectRequisition.cshtml" />
+    <Content Include="Views\Head\Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

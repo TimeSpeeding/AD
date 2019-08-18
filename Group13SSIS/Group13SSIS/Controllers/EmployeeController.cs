@@ -129,9 +129,10 @@ namespace Group13SSIS.Controllers
         }
         public ActionResult RequisitionList()
         {
+            User user = (User)Session["user"];
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
-                ViewData["requisitionlist"] = db.Requisitions.ToList();
+                ViewData["requisitionlist"] = db.Requisitions.Where(x => x.ApplicantId == user.UserId).ToList();
             }
             return View();
         }
