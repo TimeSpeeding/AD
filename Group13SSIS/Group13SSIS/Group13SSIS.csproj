@@ -319,6 +319,7 @@
     <Content Include="Views\Clerk\RetrievalList.cshtml" />
     <Content Include="Views\Clerk\_ClerkLayout.cshtml" />
     <Content Include="Views\Clerk\RequisitionDetails.cshtml" />
+    <Content Include="Views\Manager\EditSupplyDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,106 @@
+﻿@model Group13SSIS.Models.SupplyDetailVM
+
+@{
+    ViewBag.Title = "EditSupplyDetail";
+    Layout = "_ManagerLayout.cshtml";
+    var stationery = ViewData["stationery"] as Group13SSIS.Models.Stationery;
+    var supplydetail = ViewData["supplydetail"] as Group13SSIS.Models.SupplyDetail;
+    var suppliers = ViewData["suppliers"] as List<Group13SSIS.Models.Supplier>;
+}
+
+<h2>EditSupplyDetail</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <b class="control-label col-md-2">Code:</b>
+        <div class="col-md-10">@stationery.Code</div>
+    </div>
+
+    <div class="form-group">
+        <b class="control-label col-md-2">Stationery:</b>
+        <div class="col-md-10">@stationery.Description</div>
+    </div>
+
+    <input type="hidden" id="StationeryId" name="StationeryId" value="@stationery.StationeryId" />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstSupplierId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="FirstSupplierId" name="FirstSupplierId">
+                <option value="">-- Please select a supplier --</option>
+                @foreach (var item in suppliers)
+                {
+                    if (item.SupplierId == supplydetail.FirstSupplierId)
+                    {
+                        <option value="@item.SupplierId" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.SupplierId">@item.Name</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.FirstSupplierId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.SecondSupplierId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="SecondSupplierId" name="SecondSupplierId">
+                <option value="">-- Please select a supplier --</option>
+                @foreach (var item in suppliers)
+                {
+                    if (item.SupplierId == supplydetail.SecondSupplierId)
+                    {
+                        <option value="@item.SupplierId" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.SupplierId">@item.Name</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.SecondSupplierId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ThirdSupplierId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="ThirdSupplierId" name="ThirdSupplierId">
+                <option value="">-- Please select a supplier --</option>
+                @foreach (var item in suppliers)
+                {
+                    if (item.SupplierId == supplydetail.ThirdSupplierId)
+                    {
+                        <option value="@item.SupplierId" selected>@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.SupplierId">@item.Name</option>
+                    }
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.ThirdSupplierId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Edit" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "SupplyDetailList")
+</div>

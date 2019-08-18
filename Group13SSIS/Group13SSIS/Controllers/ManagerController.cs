@@ -341,5 +341,62 @@ namespace Group13SSIS.Controllers
             }
             return View(supplyDetailVM);
         }
+        [HttpGet]
+        public ActionResult EditSupplyDetail(int id)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var suppliers = db.Suppliers.ToList();
+                var supplydetail = db.SupplyDetails.Where(x => x.SupplyDetailId == id).FirstOrDefault();
+                var stationery = db.Stationeries.Where(x => x.StationeryId == supplydetail.StationeryId).FirstOrDefault();
+                ViewData["supplydetail"] = supplydetail;
+                ViewData["stationery"] = stationery;
+                ViewData["suppliers"] = suppliers;
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EditSupplyDetail(int id, SupplyDetailVM supplyDetailVM)
+        {
+            using (Group13SSISEntities dc = new Group13SSISEntities())
+            {
+                var suppliers = dc.Suppliers.ToList();
+                var supplydetail = dc.SupplyDetails.Where(x => x.SupplyDetailId == id).FirstOrDefault();
+                var stationery = dc.Stationeries.Where(x => x.StationeryId == supplydetail.StationeryId).FirstOrDefault();
+                ViewData["supplydetail"] = supplydetail;
+                ViewData["stationery"] = stationery;
+                ViewData["suppliers"] = suppliers;
+            }
+            if (ModelState.IsValid)
+            {
+                if (supplyDetailVM.SecondSupplierId == supplyDetailVM.FirstSupplierId
+                    || supplyDetailVM.SecondSupplierId == supplyDetailVM.ThirdSupplierId
+                    || supplyDetailVM.ThirdSupplierId == supplyDetailVM.FirstSupplierId)
+                {
+                    ModelState.AddModelError("FirstSupplierId", "These suppliers cannot be same!");
+                    return View(supplyDetailVM);
+                }
+                using (Group13SSISEntities db = new Group13SSISEntities())
+                {
+                    SupplyDetail supply = db.SupplyDetails.Where(x => x.SupplyDetailId == id).FirstOrDefault();
+                    supply.FirstSupplierId = Int32.Parse(supplyDetailVM.FirstSupplierId);
+                    supply.SecondSupplierId = Int32.Parse(supplyDetailVM.SecondSupplierId);
+                    supply.ThirdSupplierId = Int32.Parse(supplyDetailVM.ThirdSupplierId);
+                    db.SaveChanges();
+                    return RedirectToAction("SupplyDetailList");
+                }
+            }
+            return View(supplyDetailVM);
+        }
+        public ActionResult DeleteSupplyDetail(int id)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                SupplyDetail supply = db.SupplyDetails.Where(x => x.SupplyDetailId == id).FirstOrDefault();
+                db.SupplyDetails.Remove(supply);
+                db.SaveChanges();
+            }
+            return RedirectToAction("SupplyDetailList");
+        }
     }
 }
