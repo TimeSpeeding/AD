@@ -135,6 +135,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ClerkController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HeadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -154,10 +155,19 @@
     <Compile Include="Models\Dept.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Disbursement.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DisbursementDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Extended\AdjustmentVM.cs" />
     <Compile Include="Models\Extended\Cart.cs" />
     <Compile Include="Models\Extended\CartLine.cs" />
     <Compile Include="Models\Extended\CollectionPoint.cs" />
+    <Compile Include="Models\Extended\DisbursementVM.cs" />
     <Compile Include="Models\Extended\RequisitionVM.cs" />
+    <Compile Include="Models\Extended\RetrievalVM.cs" />
     <Compile Include="Models\Extended\Supplier.cs" />
     <Compile Include="Models\Extended\DeptVM.cs" />
     <Compile Include="Models\Extended\Stationery.cs" />
@@ -302,6 +312,13 @@
     <Content Include="Views\Head\RequisitionDetails.cshtml" />
     <Content Include="Views\Head\RejectRequisition.cshtml" />
     <Content Include="Views\Head\Setting.cshtml" />
+    <Content Include="Views\Clerk\Adjustment.cshtml" />
+    <Content Include="Views\Clerk\DeliveryList.cshtml" />
+    <Content Include="Views\Clerk\Index.cshtml" />
+    <Content Include="Views\Clerk\RequisitionList.cshtml" />
+    <Content Include="Views\Clerk\RetrievalList.cshtml" />
+    <Content Include="Views\Clerk\_ClerkLayout.cshtml" />
+    <Content Include="Views\Clerk\RequisitionDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

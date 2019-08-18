@@ -1,0 +1,92 @@
+﻿@model Group13SSIS.Models.DisbursementVM
+@{
+    ViewBag.Title = "DeliveryList";
+    Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
+    var disbursements = Model.Disbursements;
+    var depts = Model.Depts;
+    int count = 0;
+    int count2 = 0;
+}
+
+<h2>DeliveryList</h2>
+@foreach (var dept in disbursements)
+{
+    <button type="button" onclick="dept('div_@dept.Key')">@depts[dept.Key].DeptName</button>
+}
+@foreach (var dept in disbursements)
+{
+    <div id="div_@dept.Key" style="display:none">
+        <h3>@depts[dept.Key].DeptName</h3>
+        <h4>RepName: @depts[dept.Key].RepName</h4>
+        <h4>CollectionPoint: @depts[dept.Key].Point</h4>
+        <form method="post">
+            <table class="table">
+                <tr>
+                    <th>Description</th>
+                    <th>NeededQty</th>
+                    <th>RetrievalQty</th>
+                    <th></th>
+                    <th>DeliveryQty</th>
+                    <th></th>
+                    <th>Comment</th>
+                </tr>
+                @{ count2 = 0; }
+                @foreach (var d in dept.Value)
+                {
+                    <tr id="tr_@count">
+                        <td>@d.StationeryDescription</td>
+                        <td>@d.NeededQty</td>
+                        <td id="rq_@count">@d.RetrievalQty</td>
+                        <td><button type="button" onclick="deduct('rq_@count','dq_@count','tr_@count','co_@count')">-</button></td>
+                        <td><input name="dList[@count2].DeliveryQty" type="number" id="dq_@count" value="@d.DeliveryQty" oninput="validate('rq_@count','dq_@count','tr_@count','co_@count')"></td>
+                        <td><button type="button" onclick="plus('rq_@count','dq_@count','tr_@count','co_@count')">+</button></td>
+                        <td>
+                            <input name="dList[@count2].Comment" type="text" id="co_@count" value="@d.Comment">
+                            <input name="dList[@count2].DisbursementDetailId" type="hidden" value="@d.DisbursementDetailId">
+                        </td>
+                    </tr>
+                    { count++; count2++; }
+                }
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+}
+    <script>
+    function plus(rq, dq, tr, co) {
+        document.getElementById(dq).value++;
+        validate(rq, dq, tr, co);
+    }
+
+    function deduct(rq, dq, tr, co) {
+        if (document.getElementById(dq).value > 0) {
+            document.getElementById(dq).value--;
+            validate(rq, dq, tr, co);
+        }
+    }
+
+    function validate(rq, dq, tr, co) {
+        if (document.getElementById(rq).innerHTML != document.getElementById(dq).value) {
+            document.getElementById(tr).style.color = 'red';
+            document.getElementById(co).required = true;
+        } else {
+            document.getElementById(tr).style.color = 'black';
+            document.getElementById(co).required = false;
+            document.getElementById(co).value = null;
+        }
+    }
+
+    function dept(div_deptId) {
+        @foreach(var dept in disbursements)
+        {
+        <text>document.getElementById('div_@dept.Key').style.display = "none";</text>
+        }
+        document.getElementById(div_deptId).style.display = "inline";
+    }
+
+@for(int i = 0;i < count; i++)
+{
+    <text>validate('rq_@i', 'dq_@i', 'tr_@i', 'co_@i')</text>
+}
+    </script>
+

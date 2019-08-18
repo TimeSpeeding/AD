@@ -1,0 +1,99 @@
+﻿@model Group13SSIS.Models.RetrievalVM
+@{
+    ViewBag.Title = "GetRetrievalList";
+    Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
+    var retrievalDictionary = Model.RetrievalDictionary;
+    var stationeryRetrievalDictionary = Model.StationeryRetrievalDictionary;
+    int count = 0;
+}
+
+<h2>RetrievalList</h2>
+
+<div style="float:right">
+    <table>
+        <tr>
+            <td>Description</td>
+            <td>NeededQty</td>
+            <td>RetrievalQty</td>
+
+        </tr>
+        @foreach (var s in stationeryRetrievalDictionary)
+        {
+            <tr>
+                <td>@s.Value.Description</td>
+                <td>@s.Value.NeededQty</td>
+                <td><span id="s_@s.Key">0</span></td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+<div>
+    <form method="post">
+        <button>Submit</button>
+        @foreach (var dict in retrievalDictionary)
+        {
+            <h3>@dict.Key</h3>
+            <table class="table">
+                <tr>
+                    <th>Description</th>
+                    <th>NeededQty</th>
+                    <th></th>
+                    <th>RetrievalQty</th>
+                    <th></th>
+                </tr>
+                @foreach (var r in dict.Value)
+                {
+                    <tr>
+                        <td>@r.Value.Description</td>
+                        <td>@r.Value.NeededQty</td>
+                        <td><button type="button" onclick="deduct('@count @r.Value.StationeryId')">-</button></td>
+                        <td>
+                            <input type="number" id="@count @r.Value.StationeryId" name="retrievalList[@count].RetrievalQty" value="@r.Value.RetrievalQty" oninput="update()">
+                            <input type="hidden" name="retrievalList[@count].DeptId" value="@r.Value.DeptId" />
+                            <input type="hidden" name="retrievalList[@count].StationeryId" value="@r.Value.StationeryId" />
+                            <input type="hidden" name="retrievalList[@count].NeededQty" value="@r.Value.NeededQty" />
+                        </td>
+                        <td><button type="button" onclick="plus('@count @r.Value.StationeryId')">+</button></td>
+                    </tr>
+                    { count++; }
+                }
+            </table>
+        }
+    </form>
+</div>
+
+
+<script>
+    function plus(id) {
+        document.getElementById(id).value++;
+        update();
+    }
+
+    function deduct(id) {
+        if (document.getElementById(id).value > 0) {
+            document.getElementById(id).value--;
+            update();
+        }
+    }
+    @{ count=0; }
+    function update() {
+        @foreach (var s in stationeryRetrievalDictionary)
+        {
+        <text>document.getElementById('s_@s.Key').innerHTML = 0;</text>
+        }
+
+        @foreach(var dept in retrievalDictionary)
+        {
+            foreach(var r in dept.Value)
+            {
+        <text>document.getElementById('s_@r.Key').innerHTML = Number(document.getElementById('s_@r.Key').innerHTML) + Number(document.getElementById('@count @r.Value.StationeryId').value);</text>
+                { count++; }
+            }
+        }
+    }
+    window.onload = update;
+</script>
+
+

@@ -35,6 +35,7 @@ namespace Group13SSIS.Controllers
                     if (user.RoleId == 1) return RedirectToAction("Index", "Admin");
                     else if (user.RoleId == 2) return RedirectToAction("Index", "Employee");
                     else if (user.RoleId == 3) return RedirectToAction("Index", "Head");
+                    else if (user.RoleId == 4) return RedirectToAction("Index", "Clerk");
                     else if (user.RoleId == 6) return RedirectToAction("Index", "Manager");
                     else return RedirectToAction("index", "Home");
                 }

@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "RequisitionDetails";
+    Layout = "_ClerkLayout.cshtml";
+    var list = ViewData["list"] as List<Group13SSIS.Models.CartLine>;
+    var requisition = ViewData["requisition"] as Group13SSIS.Models.RequisitionVM;
+    double sum = 0;
+}
+
+<h2>RequisitionDetails</h2>
+
+Applicant:@requisition.ApplicantId
+Submit Date: @requisition.Date
+Status: @requisition.Status
+
+<table class="table">
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>UOM</th>
+        <th>Qty</th>
+        <th>Subtotal</th>
+    </tr>
+
+    @foreach (var item in list)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(x => item.Stationery.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stationery.UOM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @(item.Stationery.Price * item.Qty)
+                @{
+                    sum = sum + item.Stationery.Price * item.Qty;
+                }
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="text-center" style="font-size: 30px;font-weight: bold;color: red;">
+    <span>Total: </span> @sum
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "RequisitionList")
+</div>

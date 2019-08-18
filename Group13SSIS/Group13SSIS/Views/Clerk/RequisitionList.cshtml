@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "GetRequisitionList";
+    Layout = "_ClerkLayout.cshtml";
+    var requisitionList = ViewData["requisitionlist"] as List<Group13SSIS.Models.RequisitionVM>;
+}
+
+<h2>RequisitionList</h2>
+
+<a href="RetrievalList">Generate</a>
+
+<table class="table">
+    <tr>
+        <th>RequisitionId</th>
+        <th>Applicant</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var r in requisitionList)
+    {
+    <tr>
+        <td>@r.RequisitionId</td>
+        <td>@r.ApplicantId</td>
+        <td>@r.Date.ToString("d/M/yyyy")</td>
+        <td>
+            @Html.ActionLink("Details", "RequisitionDetails", new { id = r.RequisitionId })
+        </td>
+    </tr>
+    }
+
+</table>
+

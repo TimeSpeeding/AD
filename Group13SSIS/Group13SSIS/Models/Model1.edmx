@@ -49,6 +49,29 @@
           <Property Name="PointId" Type="int" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="DisbursementId" />
+          </Key>
+          <Property Name="DisbursementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptId" Type="int" Nullable="false" />
+          <Property Name="RepId" Type="int" />
+          <Property Name="PointId" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DisbursementDetail">
+          <Key>
+            <PropertyRef Name="DisbursementDetailId" />
+          </Key>
+          <Property Name="DisbursementDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisbursementId" Type="int" Nullable="false" />
+          <Property Name="StationeryId" Type="int" Nullable="false" />
+          <Property Name="NeededQty" Type="int" Nullable="false" />
+          <Property Name="RetrievalQty" Type="int" />
+          <Property Name="DeliveryQty" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Reorder">
           <Key>
             <PropertyRef Name="ReorderId" />
@@ -150,6 +173,8 @@
           <EntitySet Name="AdjustmentDetail" EntityType="Self.AdjustmentDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CollectionPoint" EntityType="Self.CollectionPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dept" EntityType="Self.Dept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disbursement" EntityType="Self.Disbursement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisbursementDetail" EntityType="Self.DisbursementDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reorder" EntityType="Self.Reorder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReorderDetail" EntityType="Self.ReorderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Requisition" EntityType="Self.Requisition" Schema="dbo" store:Type="Tables" />
@@ -208,6 +233,29 @@
           <Property Name="RepId" Type="Int32" />
           <Property Name="PointId" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Disbursement">
+          <Key>
+            <PropertyRef Name="DisbursementId" />
+          </Key>
+          <Property Name="DisbursementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptId" Type="Int32" Nullable="false" />
+          <Property Name="RepId" Type="Int32" />
+          <Property Name="PointId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DisbursementDetail">
+          <Key>
+            <PropertyRef Name="DisbursementDetailId" />
+          </Key>
+          <Property Name="DisbursementDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisbursementId" Type="Int32" Nullable="false" />
+          <Property Name="StationeryId" Type="Int32" Nullable="false" />
+          <Property Name="NeededQty" Type="Int32" Nullable="false" />
+          <Property Name="RetrievalQty" Type="Int32" />
+          <Property Name="DeliveryQty" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Reorder">
           <Key>
@@ -310,6 +358,8 @@
           <EntitySet Name="AdjustmentDetails" EntityType="Self.AdjustmentDetail" />
           <EntitySet Name="CollectionPoints" EntityType="Self.CollectionPoint" />
           <EntitySet Name="Depts" EntityType="Self.Dept" />
+          <EntitySet Name="Disbursements" EntityType="Self.Disbursement" />
+          <EntitySet Name="DisbursementDetails" EntityType="Self.DisbursementDetail" />
           <EntitySet Name="Reorders" EntityType="Self.Reorder" />
           <EntitySet Name="ReorderDetails" EntityType="Self.ReorderDetail" />
           <EntitySet Name="Requisitions" EntityType="Self.Requisition" />
@@ -371,6 +421,31 @@
                 <ScalarProperty Name="RepId" ColumnName="RepId" />
                 <ScalarProperty Name="PointId" ColumnName="PointId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Disbursements">
+            <EntityTypeMapping TypeName="Group13SSISModel.Disbursement">
+              <MappingFragment StoreEntitySet="Disbursement">
+                <ScalarProperty Name="DisbursementId" ColumnName="DisbursementId" />
+                <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+                <ScalarProperty Name="RepId" ColumnName="RepId" />
+                <ScalarProperty Name="PointId" ColumnName="PointId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisbursementDetails">
+            <EntityTypeMapping TypeName="Group13SSISModel.DisbursementDetail">
+              <MappingFragment StoreEntitySet="DisbursementDetail">
+                <ScalarProperty Name="DisbursementDetailId" ColumnName="DisbursementDetailId" />
+                <ScalarProperty Name="DisbursementId" ColumnName="DisbursementId" />
+                <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
+                <ScalarProperty Name="NeededQty" ColumnName="NeededQty" />
+                <ScalarProperty Name="RetrievalQty" ColumnName="RetrievalQty" />
+                <ScalarProperty Name="DeliveryQty" ColumnName="DeliveryQty" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

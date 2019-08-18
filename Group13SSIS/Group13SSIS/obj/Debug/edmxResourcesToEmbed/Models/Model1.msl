@@ -49,6 +49,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Disbursements">
+      <EntityTypeMapping TypeName="Group13SSISModel.Disbursement">
+        <MappingFragment StoreEntitySet="Disbursement">
+          <ScalarProperty Name="DisbursementId" ColumnName="DisbursementId" />
+          <ScalarProperty Name="DeptId" ColumnName="DeptId" />
+          <ScalarProperty Name="RepId" ColumnName="RepId" />
+          <ScalarProperty Name="PointId" ColumnName="PointId" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisbursementDetails">
+      <EntityTypeMapping TypeName="Group13SSISModel.DisbursementDetail">
+        <MappingFragment StoreEntitySet="DisbursementDetail">
+          <ScalarProperty Name="DisbursementDetailId" ColumnName="DisbursementDetailId" />
+          <ScalarProperty Name="DisbursementId" ColumnName="DisbursementId" />
+          <ScalarProperty Name="StationeryId" ColumnName="StationeryId" />
+          <ScalarProperty Name="NeededQty" ColumnName="NeededQty" />
+          <ScalarProperty Name="RetrievalQty" ColumnName="RetrievalQty" />
+          <ScalarProperty Name="DeliveryQty" ColumnName="DeliveryQty" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Reorders">
       <EntityTypeMapping TypeName="Group13SSISModel.Reorder">
         <MappingFragment StoreEntitySet="Reorder">

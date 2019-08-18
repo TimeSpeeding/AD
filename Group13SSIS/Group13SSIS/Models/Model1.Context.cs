@@ -29,6 +29,8 @@ namespace Group13SSIS.Models
         public virtual DbSet<AdjustmentDetail> AdjustmentDetails { get; set; }
         public virtual DbSet<CollectionPoint> CollectionPoints { get; set; }
         public virtual DbSet<Dept> Depts { get; set; }
+        public virtual DbSet<Disbursement> Disbursements { get; set; }
+        public virtual DbSet<DisbursementDetail> DisbursementDetails { get; set; }
         public virtual DbSet<Reorder> Reorders { get; set; }
         public virtual DbSet<ReorderDetail> ReorderDetails { get; set; }
         public virtual DbSet<Requisition> Requisitions { get; set; }

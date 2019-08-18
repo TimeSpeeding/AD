@@ -1,0 +1,104 @@
+﻿@model Group13SSIS.Models.AdjustmentVM
+@{
+    ViewBag.Title = "Adjustment";
+    Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
+    var stationeries = Model.Stationeries;
+}
+
+<h2>Adjustment</h2>
+
+@foreach (var category in stationeries)
+{
+    <button type="button" onclick="category('div_@category.Key')">@category.Key</button>
+}
+
+@foreach (var category in stationeries)
+{
+    <div  id="div_@category.Key" style="display:none;">
+        <h3>@category.Key</h3>
+        <table class="table">
+            <tr>
+                <th>StationeryId</th>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>UOM</th>
+                <th>Adjust</th>
+            </tr>
+            @foreach (var s in category.Value)
+            {
+                <tr>
+                    <td>@s.StationeryId</td>
+                    <td id="des_@s.StationeryId">@s.Description</td>
+                    <td>@s.Qty</td>
+                    <td>@s.UOM</td>
+                    <td><button type="button" onclick="add('@s.StationeryId')">Adjust</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+<div style="display:none;" id="div_adj">
+    <h3>Adjustment Form</h3>
+    <form id="form_adj" method="post">
+        <table id="table_adj" class="table">
+            <tr>
+                <th>Stationery Id</th>
+                <th>Description</th>
+                <th>Adjustment</th>
+                <th>Reason</th>
+                <th>Delete</th>
+            </tr>
+        </table>
+        <button type="reset">Reset</button><button type="button" onclick="GenerateName()">Submit</button>
+    </form>
+</div>
+
+<script>
+    function category(div_category) {
+        @foreach (var category in stationeries)
+        {
+        <text>document.getElementById('div_@category.Key').style.display = "none";</text>
+        }
+        document.getElementById(div_category).style.display = "inline";
+    }
+    var StationerySet = new Set();
+    function add(s_id) {
+        if (!StationerySet.has(Number(s_id))) {
+            StationerySet.add(Number(s_id));
+            var table = document.getElementById("table_adj");
+            var row = table.insertRow(1);
+            row.id = "tr_" + s_id;
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            cell1.innerHTML = s_id;
+            cell2.innerHTML = document.getElementById('des_' + s_id).innerHTML;
+            cell3.innerHTML = "<input id='input_qty_" + s_id+"' type='number' required>";
+            cell4.innerHTML = "<input id='input_reason_" + s_id + "' type='text' required>"
+                + "<input id='input_id_" + s_id + "' type='hidden' value='" + s_id+"'>";
+            cell5.innerHTML = "<button type='button' onclick='Delete(\"" + s_id + "\")'>Delete</button>";
+            document.getElementById("div_adj").style.display = "inline";
+        }
+    }
+    function Delete(s_id){
+        document.getElementById('tr_'+s_id).remove();
+        StationerySet.delete(Number(s_id));
+        if (StationerySet.size == 0) {
+            document.getElementById("div_adj").style.display = "none";
+        }
+    }
+    function GenerateName() {
+        var count = 0;
+        for (id of StationerySet.values()) {
+            document.getElementById('input_qty_' + id).name = 'ad[' + count + '].Qty';
+            document.getElementById('input_reason_' + id).name = 'ad[' + count + '].Reason';
+            document.getElementById('input_id_' + id).name = 'ad[' + count + '].StationeryId';
+            count++;
+        }
+        document.getElementById('form_adj').submit();
+    }
+
+</script>
