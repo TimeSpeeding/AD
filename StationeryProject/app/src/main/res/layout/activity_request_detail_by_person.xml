@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RequestDetailByPerson">
+
+    <include
+        android:id="@+id/show_header"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+    <TextView
+        android:text="Request Details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/title"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@id/tv_app"
+        android:layout_marginBottom="10dp"
+        android:text="Request Date:"/>
+
+    <TextView
+        android:id="@+id/tv_show_date"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:text="2019-01-01"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/tv_date"
+        android:layout_below="@id/tv_show_applicant"/>
+
+    <LinearLayout
+        android:id="@+id/linear_current_request"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/tv_date"
+        style="@style/list_view"
+        >
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            style="@style/listHeader"
+            android:text="Stationery"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            style="@style/listHeader"
+            android:gravity="center"
+            android:text="@string/Qty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_request_detail_by_person"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#B4B3B3"
+        android:dividerHeight="1.0dip"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        android:layout_below="@id/linear_current_request"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="1.5dip"
+        android:background="#B4B3B3"/>
+
+</LinearLayout>

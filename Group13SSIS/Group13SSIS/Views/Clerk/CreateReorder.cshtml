@@ -1,0 +1,39 @@
+﻿@{
+                ViewBag.Title = "ReorderList";
+                Layout = "_ClerkLayout.cshtml";
+                var stationery = ViewData["stationery"] as List<Group13SSIS.Models.Stationery>;
+}
+<h2>CreateReorder</h2>
+
+@using (Html.BeginForm("CreateReorder", "Clerk", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Stationery Code</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Qty</th>
+            <th>ReorderLevel</th>
+            <th>ReorderQty</th>
+            <th>UOM</th>
+        </tr>
+        @foreach (var item in stationery)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="reorders" value=@item.StationeryId>
+                </td>
+                <td>@Html.DisplayFor(x => item.Code)</td>
+                <td>@Html.DisplayFor(x => item.Description)</td>
+                <td>@Html.DisplayFor(x => item.Category)</td>
+                <td>@Html.DisplayFor(x => item.Qty)</td>
+                <td>@Html.DisplayFor(x => item.ReorderLevel)</td>
+                <td>@Html.DisplayFor(x => item.ReorderQty)</td>
+                <td>@Html.DisplayFor(x => item.UOM)</td>
+            </tr>
+        }
+    </table>
+
+    <input type="submit" value="submit" />
+}

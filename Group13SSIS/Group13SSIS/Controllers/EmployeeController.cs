@@ -106,13 +106,13 @@ namespace Group13SSIS.Controllers
                 Requisition requisition = new Requisition();
                 requisition.ApplicantId = user.UserId;
                 requisition.Date = DateTime.Today;
-                requisition.Status = "Pending";
+                requisition.Status = "Pend";
                 db.Requisitions.Add(requisition);
                 db.SaveChanges();
             }
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
-                Requisition re = db.Requisitions.Where(x => x.ApplicantId == user.UserId && x.Status == "Pending").FirstOrDefault();
+                Requisition re = db.Requisitions.Where(x => x.ApplicantId == user.UserId && x.Status == "Pend").FirstOrDefault();
                 foreach (var item in cart.GetList())
                 {
                     RequisitionDetail requisitionDetail = new RequisitionDetail();
@@ -121,7 +121,7 @@ namespace Group13SSIS.Controllers
                     requisitionDetail.Quantity = item.Qty;
                     db.RequisitionDetails.Add(requisitionDetail);
                 }
-                re.Status = "Applied";
+                re.Status = "Pending";
                 db.SaveChanges();
             }
             Session["cart"] = new Cart();

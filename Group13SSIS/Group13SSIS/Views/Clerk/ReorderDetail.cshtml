@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Group13SSIS.Models.ReorderDetailVM>
+
+@{
+    ViewBag.Title = "ReorderDetail";
+    Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
+    var reorder = ViewData["reorder"] as Group13SSIS.Models.ReoederVM;
+}
+
+<h2>ReorderDetail</h2>
+
+<p>Supplier: @reorder.SupplierId</p>
+<p>Clerk: @reorder.ClerkId</p>
+<p>Amount: @reorder.Amount</p>
+<p>Data: @reorder.Date</p>
+<p>Status: @reorder.Status</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Stationery.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Stationery.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th>Sub total</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <th>
+            @Html.DisplayFor(modelItem => item.Stationery.Code)
+        </th>
+        <th>
+            @Html.DisplayFor(modelItem => item.Stationery.Description)
+        </th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @(item.Stationery.Price * item.Qty)
+        </td>
+    </tr>
+}
+
+</table>

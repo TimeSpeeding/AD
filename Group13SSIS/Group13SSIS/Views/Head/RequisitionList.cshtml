@@ -35,7 +35,7 @@
         </td>
         <td>
             @Html.ActionLink("Details", "RequisitionDetails", new { id = item.RequisitionId })
-            @if (item.Status == "Applied")
+            @if (item.Status == "Pending")
             {
                 @: | 
                 @Html.ActionLink("Approve", "ApproveRequisition", new { id = item.RequisitionId })

@@ -17,49 +17,50 @@
         <th>Category</th>
         <th>Price</th>
         <th>UOM</th>
-        <th>Qty</th>
+        <th style="width:15%">Qty</th>
         <th>Subtotal</th>
     </tr>
 
     @foreach (var item in cartlist)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(x => item.Stationery.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stationery.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stationery.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stationery.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stationery.UOM)
-            </td>
-            <td>
+    <tr class="bbox">
+        <td>
+            @Html.DisplayFor(x => item.Stationery.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stationery.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stationery.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stationery.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Stationery.UOM)
+        </td>
+        <td>
+            <input type="hidden" id="id" name="id" value=@item.Stationery.StationeryId />
+            <input class="demo2" type="text" value="@item.Qty" name="demo2" />
+        </td>
+        <td>
+            @(item.Stationery.Price * item.Qty)
+            @{
+                sum = sum + item.Stationery.Price * item.Qty;
+            }
+        </td>
+        <td>
+            @using (Html.BeginForm("RemoveFromCart", "Employee"))
+            {
                 <input type="hidden" id="id" name="id" value=@item.Stationery.StationeryId />
-                <input class="demo2" type="text" value="@item.Qty" name="demo2" />
-            </td>
-            <td>
-                @(item.Stationery.Price * item.Qty)
-                @{
-                    sum = sum + item.Stationery.Price * item.Qty;
-                }
-            </td>
-            <td>
-                @using (Html.BeginForm("RemoveFromCart", "Employee"))
-                {
-                    <input type="hidden" id="id" name="id" value=@item.Stationery.StationeryId />
-                    <input type="submit" value="Remove" />
-                }
-            </td>
-        </tr>
+                <input type="submit" value="Remove" />
+            }
+        </td>
+    </tr>
     }
 
-</table>
+    </table>
+
 
 <div class="text-center" style="font-size: 30px;font-weight: bold;color: red;">
     <span>Total: </span> @sum
@@ -82,14 +83,14 @@
                 max: 1000
             });
             i.on("touchspin.on.stopupspin", function () {
-                $.post('@Url.Action("IncreaseOrDecreaseOne", "Employee")', { "id": $("#id").val(), "quantity": $(this).val() }, function (data) {
+                $.post('@Url.Action("IncreaseOrDecreaseOne", "Employee")', { "id": $(this).closest("tr.bbox").find("#id").val(), "quantity": $(this).val() }, function (data) {
                     if (data.msg) {
                         location.reload();
                     }
                 });
             });
             i.on("touchspin.on.stopdownspin", function () {
-                $.post('@Url.Action("IncreaseOrDecreaseOne", "Employee")', { "id": $('#id').val(), "quantity": $(this).val() }, function (data) {
+                $.post('@Url.Action("IncreaseOrDecreaseOne", "Employee")', { "id": $(this).closest("tr.bbox").find("#id").val(), "quantity": $(this).val() }, function (data) {
                     if (data.msg) {
                         location.reload();
                     }

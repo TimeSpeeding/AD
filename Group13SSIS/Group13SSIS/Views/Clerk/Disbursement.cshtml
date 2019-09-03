@@ -1,0 +1,37 @@
+﻿@model List<Group13SSIS.Controllers.ClerkController.DisbursementVM2>
+@{
+    ViewBag.Title = "Disbursement";
+    Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
+
+}
+
+<h2>Disbursement</h2>
+
+<table class="table">
+    <tr>
+        <th>Disbursement ID</th>
+        <th>Representative Name</th>
+        <th>Department Name</th>
+        <th>Collection Point Name</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Detail</th>
+        <th>Delivery List</th>
+    </tr>
+    @foreach (var disbursement in Model)
+    {
+        <tr>
+            <td>@disbursement.DisbursementId</td>
+            <td>@disbursement.RepName</td>
+            <td>@disbursement.DeptName</td>
+            <td>@disbursement.PointName</td>
+            <td>@disbursement.Date</td>
+            <td>@disbursement.Status</td>
+            <td><a href="disbursementDetail/@disbursement.DisbursementId">Detail</a></td>
+            <td>@if (disbursement.Status == "Retrieved")
+            {<a href="DeliveryList">Delivery List</a>}</td>
+        </tr>
+    }
+
+</table>
+

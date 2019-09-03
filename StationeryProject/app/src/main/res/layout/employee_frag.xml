@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/btn_apply"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        style="@style/dashboard"
+        android:text="Apply for Stationery"/>
+
+    <Button
+        android:id="@+id/btn_view_request_histories"
+        android:layout_height="wrap_content"
+        style="@style/dashboard"
+        android:text="View Request Histories"/>
+
+
+    <Button
+        android:id="@+id/btn_confirm"
+        style="@style/dashboard"
+        android:text="Confirm Disbursement"
+        android:visibility="invisible"/>
+
+
+</LinearLayout>

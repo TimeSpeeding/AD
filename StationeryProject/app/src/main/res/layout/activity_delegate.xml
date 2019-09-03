@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Delegate">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/title"
+            android:text="Set Delegation"/>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="100dp">
+        <TextView
+            android:id="@+id/tv_delegate_to"
+            style="@style/delegate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/sp_delegate_list"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_from"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:text="Delegate to:"/>
+        <Spinner
+            android:id="@+id/sp_delegate_list"
+            style="@style/delegate"
+            app:layout_constraintLeft_toRightOf="@id/tv_delegate_to"
+            app:layout_constraintBottom_toTopOf="@id/ed_from"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_from"
+            style="@style/delegate"
+            app:layout_constraintBottom_toTopOf="@id/tv_to"
+            app:layout_constraintTop_toBottomOf="@id/tv_delegate_to"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ed_from"
+            android:text="from:"/>
+        <EditText
+            android:id="@+id/ed_from"
+            style="@style/delegate"
+            app:layout_constraintBottom_toTopOf="@id/ed_to"
+            app:layout_constraintTop_toBottomOf="@id/sp_delegate_list"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_from"/>
+        <TextView
+            android:id="@+id/tv_to"
+            style="@style/delegate"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toBottomOf="@id/tv_from"
+            app:layout_constraintRight_toLeftOf="@id/ed_to"
+            android:text="to:"/>
+        <EditText
+            android:id="@+id/ed_to"
+            style="@style/delegate"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tv_to"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_from"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_set_delegate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="submit"/>
+
+
+
+</LinearLayout>

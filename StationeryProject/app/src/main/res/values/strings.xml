@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Stationery Application</string>
+    <string name="applicant">Applicant</string>
+    <string name="request_date">Request Date</string>
+    <string name="description">Description</string>
+    <string name="Qty">Quantity</string>
+    <string name="unit">Unit</string>
+    <string name="itemName">Item Name</string>
+    <string name="category">Category</string>
+    <string name="safetyQty">Safety Qty</string>
+    <string name="status">Status</string>
+
+    <string-array name="category_description">
+        <item>Eraser, 2 inch Rubber</item>
+        <item>Eraser, 3 inch Rubber</item>
+        <item>Eraser, 4 inch Rubber</item>
+
+        <item>Pen, Red Felted Pen</item>
+        <item>Pen, Blue Ink Pen</item>
+        <item>Pen, Black Ballpoint Pen</item>
+
+        <item>Stapler, Blue Plastic Stapler</item>
+        <item>Stapler, Stainless Steel Stapler</item>
+        <item>Stapler, Giant Industry Stapler</item>
+    </string-array>
+</resources>

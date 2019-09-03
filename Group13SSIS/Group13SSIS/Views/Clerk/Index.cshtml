@@ -4,3 +4,11 @@
     Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
 }
 
+@if (ViewBag.flag == true)
+{
+    <a href="Stationery" style="font-size:40px;color:red">There are stationeries in low inventory level!!</a>
+}
+
+<div style="padding:10px 100px 0;">
+    <img src="~/Content/image/LU.jpg" height="470" width="900" opacity="50%" ; />
+</div>

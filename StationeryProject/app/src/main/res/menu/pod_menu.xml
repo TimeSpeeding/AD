@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/toHome"
+        android:title="Home"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/view_item"
+        android:title="view items"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/disbursement"
+        android:title="disbursement"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/retrieval"
+        android:title="retrieval"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/request_history"
+        android:title="request history"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/apply_adjustment"
+        android:title="apply adjustment"
+        app:showAsAction="never"/>
+    <item android:id="@+id/view_adjustment_history"
+        android:title="view adjustment history"/>
+
+</menu>

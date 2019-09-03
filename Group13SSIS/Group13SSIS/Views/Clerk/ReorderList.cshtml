@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Group13SSIS.Models.ReoederVM>
+
+@{
+    ViewBag.Title = "ReorderList";
+    Layout = "~/Views/Clerk/_ClerkLayout.cshtml";
+}
+
+<h2>ReorderList</h2>
+
+<p>
+    @Html.ActionLink("Create New Reorder", "CreateReorder")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ReorderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClerkId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReorderId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClerkId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "ReorderDetail", new { id = item.ReorderId })
+            @if (item.Status == "Pending")
+            {
+                @: | 
+                @Html.ActionLink("Receive", "ReceiveReorder", new { id = item.ReorderId })
+            }
+        </td>
+    </tr>
+}
+
+</table>

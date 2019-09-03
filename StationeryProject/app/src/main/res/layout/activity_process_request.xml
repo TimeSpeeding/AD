@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProcessRequest">
+
+    <include
+        android:id="@+id/show_header"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"/>
+
+    <TextView
+        android:id="@+id/tv_app"
+        android:layout_below="@id/show_header"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Applicant:"/>
+
+    <TextView
+        android:id="@+id/tv_show_applicant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_header"
+        android:textColor="@color/black"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:text="Hans"
+        android:layout_toRightOf="@id/tv_app"/>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@id/tv_app"
+        android:layout_marginBottom="10dp"
+        android:text="Request Date:"/>
+
+    <TextView
+        android:id="@+id/tv_show_date"
+        android:layout_width="wrap_content"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:text="2019-01-01"
+        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/tv_date"
+        android:layout_below="@id/tv_show_applicant"/>
+
+    <LinearLayout
+        android:id="@+id/linear_current_request"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/tv_date"
+        style="@style/list_view"
+        >
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            style="@style/listHeader"
+            android:text="Stationery"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            style="@style/listHeader"
+            android:gravity="center"
+            android:text="@string/Qty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_current_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#B4B3B3"
+        android:dividerHeight="1.0dip"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        android:layout_below="@id/linear_current_request"/>
+
+    <View
+        android:id="@+id/view_1"
+        android:layout_width="match_parent"
+        android:layout_below="@id/lv_current_request"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1.5dp"
+        android:background="#B4B3B3"/>
+
+    <Button
+        android:id="@+id/btn_request_approve"
+        android:layout_below="@+id/view_1"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_height="wrap_content"
+        android:text="Approve"/>
+
+    <Button
+        android:id="@+id/btn_request_reject"
+        android:layout_below="@+id/view_1"
+        android:layout_toRightOf="@id/btn_request_approve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reject"/>
+
+
+    <TextView
+        android:id="@+id/tv_request_history"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/headerColor"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/btn_request_approve"
+        android:text="   Request History:"/>
+
+    <LinearLayout
+        android:id="@+id/linear_request_history"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/tv_request_history"
+        style="@style/list_view"
+        >
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            style="@style/listHeader"
+            android:gravity="center"
+            android:text="Request Date"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="Stationery"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        <View
+        android:layout_width="1.5dip"
+        android:layout_height="fill_parent"
+        android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/Qty"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+
+        <TextView
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Status"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <View
+            android:layout_width="1.5dip"
+            android:layout_height="fill_parent"
+            android:background="#B4B3B3"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_request_history_by_emp"
+        android:layout_below="@+id/linear_request_history"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#B4B3B3"
+        android:dividerHeight="1.0dip"
+        android:fadingEdge="none"
+        android:scrollbars="none"/>
+
+    <View
+        android:id="@+id/view_x"
+        android:layout_width="match_parent"
+        android:layout_below="@id/lv_request_history_by_emp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="1.5dp"
+        android:background="#B4B3B3"/>
+
+</RelativeLayout>

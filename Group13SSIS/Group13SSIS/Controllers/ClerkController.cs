@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace Group13SSIS.Controllers
 {
@@ -12,7 +13,163 @@ namespace Group13SSIS.Controllers
     {
         public ActionResult Index()
         {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var stationery = db.Stationeries.Where(x => x.Qty <= x.ReorderLevel).ToList();
+                if (stationery != null) ViewBag.flag = true;
+                else ViewBag.flag = false;
+            }
             return View();
+        }
+        public ActionResult ReorderList()
+        {
+            List<ReoederVM> reorderlist = new List<ReoederVM>();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var list = db.Reorders.ToList();
+                foreach(var item in list)
+                {
+                    reorderlist.Add(new ReoederVM()
+                    {
+                        ReorderId = item.ReorderId,
+                        SupplierId = db.Suppliers.Where(x => x.SupplierId == item.SupplierId).FirstOrDefault().Name,
+                        ClerkId = db.Users.Where(x => x.UserId == item.ClerkId).FirstOrDefault().Name,
+                        Amount = item.Amount,
+                        Date = item.Date,
+                        Status = item.Status
+                    });
+                }
+            }
+            return View(reorderlist);
+        }
+        public ActionResult ReorderDetail(int id)
+        {
+            List<ReorderDetailVM> detaillist = new List<ReorderDetailVM>();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var a = db.Reorders.Where(x => x.ReorderId == id).FirstOrDefault();
+                ViewData["reorder"] = new ReoederVM()
+                {
+                    ReorderId = a.ReorderId,
+                    SupplierId = db.Suppliers.Where(x => x.SupplierId == a.SupplierId).FirstOrDefault().Name,
+                    ClerkId = db.Users.Where(x => x.UserId == a.ClerkId).FirstOrDefault().Name,
+                    Amount = a.Amount,
+                    Date = a.Date,
+                    Status = a.Status
+                };
+                var list = db.ReorderDetails.Where(x => x.ReorderId == id).ToList();
+                foreach(var item in list)
+                {
+                    detaillist.Add(new ReorderDetailVM()
+                    {
+                        Stationery = db.Stationeries.Where(x => x.StationeryId == item.StationeryId).FirstOrDefault(),
+                        Qty = item.Qty
+                    });
+                }
+            }
+            return View(detaillist);
+        }
+        public ActionResult ReceiveReorder(int id)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var reorder = db.Reorders.Where(x => x.ReorderId == id).FirstOrDefault();
+                reorder.Status = "Received";
+                var list = db.ReorderDetails.Where(x => x.ReorderId == id).ToList();
+                foreach(var item in list)
+                {
+                    Stationery s = db.Stationeries.Where(x => x.StationeryId == item.StationeryId).FirstOrDefault();
+                    s.Qty += item.Qty;
+                }
+                db.SaveChanges();
+            }
+            return RedirectToAction("ReorderList");
+        }
+        [HttpGet]
+        public ActionResult CreateReorder()
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var stationery = db.Stationeries.Where(x => x.Qty <= x.ReorderLevel).ToList();
+                ViewData["stationery"] = stationery;
+            }
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateReorder(int[] reorders)
+        {
+            User user = (User)Session["user"];
+            Dictionary<int, List<ReorderDetail>> d = new Dictionary<int, List<ReorderDetail>>();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                foreach (int i in reorders)
+                {
+                    var s = db.Stationeries.Where(x => x.StationeryId == i).FirstOrDefault();
+                    var supplierId = db.SupplyDetails.Where(x => x.StationeryId == i).FirstOrDefault().FirstSupplierId;
+                    int a = 0;
+                    while (a + s.Qty < s.ReorderLevel) a += s.ReorderQty;
+                    d.Add(supplierId, new List<ReorderDetail>());
+                    d[supplierId].Add(new ReorderDetail()
+                    {
+                        StationeryId = i,
+                        Qty = a
+                    });
+                }
+                foreach (int key in d.Keys)
+                {
+                    double amount = 0;
+                    foreach (var item in d[key])
+                    {
+                        var s = db.Stationeries.Where(x => x.StationeryId == item.StationeryId).FirstOrDefault();
+                        amount += item.Qty * s.Price;
+                    }
+                    db.Reorders.Add(new Reorder()
+                    {
+                        SupplierId = key,
+                        ClerkId = user.UserId,
+                        Amount = amount,
+                        Date = DateTime.Now,
+                        Status = "Pending"
+                    });
+                    db.SaveChanges();
+                    int reorderId = db.Reorders.Where(x => x.SupplierId == key && x.ClerkId == user.UserId && x.Amount == amount && x.Status == "Pending").FirstOrDefault().ReorderId;
+                    foreach (var item in d[key])
+                    {
+                        item.ReorderId = reorderId;
+                        db.ReorderDetails.Add(item);
+                    }
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("ReorderList");
+        }
+
+        public ActionResult Stationery(string Category, string Search, int? page)
+        {
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                var cateLst = db.Stationeries.Select(x => x.Category).Distinct().ToList();
+                ViewBag.Category = new SelectList(cateLst);
+                var stationeries = db.Stationeries.ToList();
+                if (!String.IsNullOrEmpty(Category))
+                {
+                    stationeries = stationeries.Where(x => x.Category == Category).ToList();
+                }
+                if (!String.IsNullOrEmpty(Search))
+                {
+                    stationeries = stationeries.Where(s => s.Description.ToLower().Contains(Search.ToLower())).ToList();
+                }
+                const int pageItems = 20;
+                int currentPage = (page ?? 1);
+                IPagedList<Stationery> pageStationeries = stationeries.ToPagedList(currentPage, pageItems);
+                StationeryVM stationeryVM = new StationeryVM()
+                {
+                    Stationeries = pageStationeries,
+                    Category = Category,
+                    Search = Search
+                };
+                return View(stationeryVM);
+            }
         }
         public ActionResult RequisitionList()
         {
@@ -173,7 +330,7 @@ namespace Group13SSIS.Controllers
                 var requisitions = db.Requisitions.Where(x => x.Status == "Approved").ToList();
                 foreach(var item in requisitions)
                 {
-                    item.Status = "Delievered";
+                    item.Status = "Processed";
                 }
                 db.SaveChanges();
                 Dictionary<int, int> deptDict = new Dictionary<int, int>();
@@ -188,7 +345,8 @@ namespace Group13SSIS.Controllers
                             DeptId = r.DeptId,
                             Date = now,
                             PointId = dept.PointId,
-                            RepId = dept.RepId
+                            RepId = dept.RepId,
+                            Status = "Retrieved"
                         };
                         db.Disbursements.Add(d);
                         db.SaveChanges();
@@ -212,7 +370,70 @@ namespace Group13SSIS.Controllers
                     db.SaveChanges();
                 }
             }
-            return RedirectToAction("DeliveryList");
+            return RedirectToAction("Disbursement");
+        }
+
+        public ActionResult Disbursement()
+        {
+            List<DisbursementVM2> vm = new List<DisbursementVM2>();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                foreach (var d in db.Disbursements.ToList())
+                {
+                    vm.Add(new DisbursementVM2()
+                    {
+                        DisbursementId = d.DisbursementId,
+                        DeptName = db.Depts.Where(dep => dep.DeptId == d.DeptId).First().Name,
+                        PointName = db.CollectionPoints.Where(c => c.PointId == d.PointId).First().Name,
+                        Date = d.Date,
+                        RepName = db.Users.Where(u => u.UserId == d.RepId).First().Name,
+                        Status = d.Status
+                    });
+                }
+            }
+            return View(vm);
+        }
+        
+        public ActionResult DisbursementDetail(string id)
+        {
+            int idInt = Int32.Parse(id);
+            List<DisbursementDetailVM> vm = new List<DisbursementDetailVM>();
+            using (Group13SSISEntities db = new Group13SSISEntities())
+            {
+                foreach (var disbursementDetail in db.DisbursementDetails.Where(dd => dd.DisbursementId == idInt).ToList())
+                {
+                    vm.Add(new DisbursementDetailVM()
+                    {
+                        DisbursementDetailId = disbursementDetail.DisbursementDetailId,
+                        StationeryDescription = db.Stationeries.Where(s => s.StationeryId == disbursementDetail.StationeryId).First().Description,
+                        NeededQty = disbursementDetail.NeededQty,
+                        RetrievalQty = disbursementDetail.RetrievalQty,
+                        DeliveryQty = disbursementDetail.DeliveryQty,
+                        Comment = disbursementDetail.Comment
+                    });
+                }
+            }
+            return View(vm);
+        }
+
+        public class DisbursementDetailVM
+        {
+            public int DisbursementDetailId { get; set; }
+            public string StationeryDescription { get; set; }
+            public int NeededQty { get; set; }
+            public Nullable<int> RetrievalQty { get; set; }
+            public Nullable<int> DeliveryQty { get; set; }
+            public string Comment { get; set; }
+        }
+
+        public class DisbursementVM2
+        {
+            public int DisbursementId { get; set; }
+            public string DeptName { get; set; }
+            public string RepName { get; set; }
+            public string PointName { get; set; }
+            public System.DateTime Date { get; set; }
+            public string Status { get; set; }
         }
 
         [HttpGet]
@@ -226,11 +447,26 @@ namespace Group13SSIS.Controllers
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
                 var disbursementDetails = db.DisbursementDetails
+                    .Where(dd => db.Disbursements
+                    .Where(d => d.Status == "Retrieved")
+                    .Select(d => d.DisbursementId)
+                    .ToList()
+                    .Contains(dd.DisbursementId))
                     .Join(db.Disbursements, dd => dd.DisbursementId, d => d.DisbursementId, (dd, d) => new
                     {
                         dd.DisbursementDetailId,
                         dd.DisbursementId,
                         d.DeptId,
+                        dd.StationeryId,
+                        dd.NeededQty,
+                        dd.RetrievalQty,
+                        dd.DeliveryQty,
+                        dd.Comment
+                    }).Join(db.Depts, dd => dd.DeptId, d => d.DeptId, (dd, d) => new
+                    {
+                        dd.DisbursementDetailId,
+                        dd.DisbursementId,
+                        dd.DeptId,
                         d.PointId,
                         d.RepId,
                         dd.StationeryId,
@@ -271,11 +507,19 @@ namespace Group13SSIS.Controllers
         {
             using (Group13SSISEntities db = new Group13SSISEntities())
             {
+                HashSet<int> DisbursementIdHashSet = new HashSet<int>();
                 foreach (var d in dList)
                 {
                     var DisbursementDetail = db.DisbursementDetails.Where(dd => dd.DisbursementDetailId == d.DisbursementDetailId).First();
                     DisbursementDetail.DeliveryQty = d.DeliveryQty;
                     DisbursementDetail.Comment = d.Comment;
+                    DisbursementIdHashSet.Add(DisbursementDetail.DisbursementId);
+                    db.SaveChanges();
+                }
+                foreach (int id in DisbursementIdHashSet)
+                {
+                    var disbursement = db.Disbursements.Where(d => d.DisbursementId == id).First();
+                    disbursement.Status = "Delivered";
                     db.SaveChanges();
                 }
             }
@@ -350,5 +594,6 @@ namespace Group13SSIS.Controllers
             }
             return RedirectToAction("Adjustment");
         }
+
     }
 }

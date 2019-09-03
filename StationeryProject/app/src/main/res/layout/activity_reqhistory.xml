@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TextView
+        android:id="@+id/historyheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stationery Request History"
+        android:textColor="#FFF"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+
+    <Button
+        android:id="@+id/btnGetHistory"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:text="Fetch"
+        android:background="@color/bright"
+        android:layout_gravity="center"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:textSize="24sp"
+        android:id="@+id/fetchhistory"
+        android:hint="History data here"
+        android:textColor="#000" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#FFF"
+                android:text="Requisition"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "@color/colorAccent"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#FFF"
+                android:text="Created Date"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "@color/colorAccent"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#FFF"
+                android:text="Status"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "@color/colorAccent"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#FFF"
+                android:text="Action"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "@color/colorAccent"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="DDS/111/99"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="20 Jul 2019"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="Pending"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#ff1818"
+                android:text="View"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="DDS/111/98"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="10 Jul 2019"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="Pending"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#ff1818"
+                android:text="View"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="DDS/111/97"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="15 Jun 2019"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="Approved"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#ff1818"
+                android:text="View"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "#FFF"
+                android:gravity="center"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="DDS/111/96"
+                android:layout_weight="1"
+                android:background = "#e8e7e3"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="05 Jun 2019"
+                android:layout_weight="1"
+                android:background = "#e8e7e3"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#000"
+                android:text="Rejected"
+                android:layout_weight="1"
+                android:background = "#e8e7e3"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width='wrap_content'
+                android:layout_height="30dp"
+                android:textColor="#ff1818"
+                android:text="View"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                android:background = "#e8e7e3"
+                android:gravity="center"/>
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

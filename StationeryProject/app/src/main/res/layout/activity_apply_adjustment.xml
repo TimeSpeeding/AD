@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ApplyAdjustment">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Apply for Adjustment"/>
+
+    <TextView
+        android:id="@+id/tv_id"
+        style="@style/adjustment"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintRight_toLeftOf="@id/tv_show_id"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:text="Item code:"/>
+
+    <TextView
+        android:id="@+id/tv_show_id"
+        style="@style/adjustment"
+        app:layout_constraintLeft_toRightOf="@id/tv_id"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        />
+
+    <TextView
+        android:id="@+id/tv_category"
+        style="@style/adjustment"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_id"
+        app:layout_constraintRight_toLeftOf="@id/tv_show_category"
+        android:text="Category:"/>
+
+    <TextView
+        android:id="@+id/tv_show_category"
+        style="@style/adjustment"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_category"
+        app:layout_constraintTop_toBottomOf="@id/tv_show_id"/>
+
+    <TextView
+        android:id="@+id/tv_description"
+        style="@style/adjustment"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@id/tv_category"
+        app:layout_constraintRight_toLeftOf="@id/tv_show_des"
+        android:text="Item Description:"/>
+
+    <TextView
+        android:id="@+id/tv_show_des"
+        style="@style/adjustment"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_show_category"/>
+
+    <TextView
+        android:id="@+id/tv_qty"
+        style="@style/adjustment"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintRight_toLeftOf="@id/et_qty"
+        android:text="Adjust Quantity:"/>
+
+    <EditText
+        android:id="@+id/et_qty"
+        style="@style/adjustment"
+        android:inputType="number"
+        android:layout_height="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/tv_qty"
+        app:layout_constraintTop_toBottomOf="@id/tv_show_des"/>
+
+    <TextView
+        android:id="@+id/tv_reason"
+        style="@style/adjustment"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_qty"
+        app:layout_constraintRight_toLeftOf="@id/ed_reason"
+        android:text="Reason:"/>
+
+    <EditText
+        android:id="@+id/ed_reason"
+        style="@style/adjustment"
+        android:layout_height="30dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_qty"
+        app:layout_constraintLeft_toRightOf="@id/tv_reason"/>
+
+    <Button
+        android:id="@+id/submit_adjustment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ed_reason"
+        android:text="Submit"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

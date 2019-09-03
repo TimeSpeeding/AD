@@ -1,0 +1,87 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="sublimePickerStyle">@style/SPDefaultImpl</item>
+    </style>
+
+    <style name="SPDefaultImpl" parent="SublimePickerStyleLight">
+        <item name="colorAccent">#FF0000</item>
+        <item name="colorPrimaryDark">#FF0000</item>
+        <item name="colorPrimary">#FF0000</item>
+        <item name="android:textColorPrimary">#212121</item>
+        <item name="android:textColorSecondary">#727272</item>
+        <item name="android:textColorPrimaryInverse">#FFFFFF</item>
+    </style>
+
+    <style name="dashboard">
+        <item name="android:layout_width">300sp</item>
+        <item name="android:background">@color/content</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="adjustment">
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="list_view">
+        <item name="android:background">#CCCCCC</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="collection">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30sp</item>
+        <item name="android:layout_marginLeft">30dp</item>
+    </style>
+
+    <style name="delegate">
+        <item name="android:layout_width">130dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="report">
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="title">
+        <item name="android:textSize">25sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/titleColor</item>
+    </style>
+
+    <style name="layout_style">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:background">@color/content</item>
+        <item name="android:layout_width">350dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="listHeader">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+</resources>

@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     var user = (Group13SSIS.Models.User)Session["user"];
     if (user == null)
     {
@@ -16,45 +16,48 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Group13</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Site.css")
+    @Styles.Render("~/Content/bootstrap.css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("SSIS", "index", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="top">
+        <div class="header">
+            <div class="left">
+                Logic University
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Stationery", "StationeryList", "Employee")</li>
-                    <li>@Html.ActionLink("Cart", "CartList", "Employee")</li>
-                    <li>@Html.ActionLink("Requisition", "RequisitionList", "Employee")</li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+            <div class="right">
+                Stationery Store Inventory System
+
+                <ul style="float:right">
                     @if (user != null)
                     {
-                        <li style="font-size:20px;padding-top:10px;color:aqua">Hello, @user.Name</li>
+                        <li style="font-size:26px; padding-top:10PX;">Hello, @user.Name</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     }
                 </ul>
             </div>
-            <div class="navbar-collapse collapse navbar-right">
-                
-            </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Group13 Stationey Store Inventory System</p>
-        </footer>
+
+    <div class="container">
+        <div class="navigation">
+            <a>@Html.ActionLink("Stationery Catalogue", "StationeryList", "Employee")</a>
+            <a>@Html.ActionLink("Create Stationery Request", "CartList", "Employee")</a>
+            <a>@Html.ActionLink("Stationery Requisition History", "RequisitionList", "Employee")</a>
+            <div class="clearer"><span></span></div>
+        </div>
+
+        <div class="main">
+            <div class="content">
+                @RenderBody()
+                <hr />
+                <div class="footer">
+                    <p>&copy; @DateTime.Now.Year - Group13 Stationey Store Inventory System</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
